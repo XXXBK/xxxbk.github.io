@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="BinkaiXu">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2025/07/15/python魔法：如何用特征识别让pdf水印隐形？/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+    
+    
+        
+        <meta name="description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 魔法：一键让 Excel 正确选项「脸红」">
+<meta property="og:url" content="http://example.com/2025/07/15/Python%E9%AD%94%E6%B3%95%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E7%89%B9%E5%BE%81%E8%AF%86%E5%88%AB%E8%AE%A9PDF%E6%B0%B4%E5%8D%B0%E9%9A%90%E5%BD%A2%EF%BC%9F/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s21.ax1x.com/2025/07/15/pV13iP1.png">
+<meta property="article:published_time" content="2025-07-15T09:21:07.000Z">
+<meta property="article:modified_time" content="2025-07-16T01:50:49.691Z">
+<meta property="article:author" content="XXXBK">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="PyMuPDF">
+<meta property="article:tag" content="PDF">
+<meta property="article:tag" content="水印去除">
+<meta property="article:tag" content="特征识别">
+<meta property="article:tag" content="文本处理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s21.ax1x.com/2025/07/15/pV13iP1.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="https://s21.ax1x.com/2025/07/15/pV13C5R.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://s21.ax1x.com/2025/07/15/pV13C5R.png">
+    <meta name="theme-color" content="#FFC0CB">
+    <link rel="shortcut icon" href="https://s21.ax1x.com/2025/07/15/pV13C5R.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            Python 魔法：一键让 Excel 正确选项「脸红」 | 缘来是这样的吗
+        
+    </title>
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/css/build/tailwind.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/GeistMono/geist-mono.css">
+
+    
+<link rel="stylesheet" href="/fonts/Geist/geist.css">
+
+    <!--- Font Part-->
+    
+    
+    
+        <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@4.5.0/index.css" rel="stylesheet">
+    
+    
+    
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"delete_mask":true,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[""]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"github","dark":"vs2015"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":false,"init_open":true},"copyright":{"enable":false,"default":"cc_by_nc_sa"},"lazyload":true,"pangu_js":false,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[],"strategy":"hybrid","exclude":["/private/","/archives/"],"min_similarity":0.2}},"colors":{"primary":"#FFC0CB","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":true,"family":"Source Han Sans SC, Microsoft YaHei, sans-serif","url":"https://cdn.jsdelivr.net/npm/@fontsource/inter@4.5.0/index.css"},"english":{"enable":false,"family":null,"url":null},"title":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":false},"website_counter":{"url":"https://cn.vercount.one/js","enable":false,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":false,"custom_message":null},"open_graph":{"enable":true,"image":"https://s21.ax1x.com/2025/07/15/pV13iP1.png","description":"Hexo Theme Redefine, Redefine Your Hexo Journey."},"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"https://s21.ax1x.com/2025/07/15/pV13iP1.png","dark":"https://s21.ax1x.com/2025/07/15/pV13iP1.png"},"title":" ","subtitle":{"text":["XXXBK"],"hitokoto":{"enable":true,"show_author":true,"api":"https://v1.hitokoto.cn?&c=d&c=c&c=k&c=i"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#FFC0CB","dark":"#FFC0CB"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"style":"default","links":{"github":"https://github.com/XXXBK","instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":true,"type":"fixed","meting":false,"audios":[{"name":"恋風","artist":"幾田りら","url":"/music/恋风.mp3","cover":"http://p2.music.126.net/LYjbg8Qe2s2O4EOPm5ijFg==/109951170675831225.jpg?param=130y130"},{"name":"群青","artist":"YOASOBI","url":"/music/群青.mp3","cover":"https://images.genius.com/72a054320dabe59b4be3823e80b74d22.1000x1000x1.jpg"},{"name":"優しい彗星","artist":"YOASOBI","url":"/music/優しい彗星.mp3","cover":"https://www.musicvoice.jp/wp-content/uploads/2021/01/pmu210113-m308.jpg"},{"name":"夜に駆ける","artist":"YOASOBI","url":"/music/夜に駆ける.mp3","cover":"https://ts1.tc.mm.bing.net/th/id/R-C.f905d573f8cf7769e3f9d8abf536ee27?rik=KeKlpCxVCF1Yow&riu=http%3a%2f%2fi2.hdslb.com%2fbfs%2farchive%2fa0f75915d2dfe1cbc20064b9b39331972caf5a18.jpg&ehk=rd8w3sHgQ%2f%2fLjuHcZYGtP2diXcKu0s245xmTUvkXKZo%3d&risl=&pid=ImgRaw&r=0"},{"name":"セブンティーン","artist":"YOASOBI","url":"/music/セブンティーン.mp3","cover":"https://is3-ssl.mzstatic.com/image/thumb/Music116/v4/c3/93/65/c393653a-e44f-f723-f82b-500b8fb49d09/197188385958.jpg/800x800bb.webp"},{"name":"もう少しだけ","artist":"YOASOBI","url":"/music/もう少しだけ.mp3","cover":"https://p1.music.126.net/seyhDwTzRNqFvYAw9FtJnw==/109951165930283941.jpg?param=130y130"},{"name":"ロマンスの約束","artist":"YOASOBI","url":"/music/ロマンスの約束.mp3","cover":"https://is5-ssl.mzstatic.com/image/thumb/Music115/v4/bf/29/c3/bf29c326-8766-2b6a-708f-b42c0e5d1754/196292065640.jpg/1200x1200bf-60.jpg"}]},"mermaid":{"enable":false,"version":"11.4.1"}},"version":"2.8.2","navbar":{"auto_hide":false,"color":{"left":"#F1F5D4","right":"#FFC0CB","transparency":35},"width":{"home":"1400px","pages":"1200px"},"links":null,"search":{"enable":true,"preload":false,"field":"post","content":false,"format":"raw"}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"right","first_item":"menu","announcement":"欢迎来到我的博客","show_on_mobile":true,"links":{"文章":{"path":"/archives","icon":"fa-regular fa-archive"},"标签":{"path":"/tags","icon":"fa-regular fa-tags"},"类别":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","excerpt_length":200,"categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3},"类别":{"enable":true,"limit":3}},"footerStart":"2025/7/5 11:05"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+
+<body>
+	<div class="progress-bar-container">
+	
+
+	
+	<span class="pjax-progress-bar"></span>
+	<!--        <span class="swup-progress-icon">-->
+	<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+	<!--        </span>-->
+	
+</div>
+
+<main class="page-container" id="swup">
+
+	
+
+	<div class="main-content-container flex flex-col justify-between min-h-dvh">
+		<div class="main-content-header">
+			<header class="navbar-container px-6 md:px-12">
+    <div class="navbar-content transition-navbar ">
+        <div class="left">
+            
+                <a class="logo-image h-8 w-8 sm:w-10 sm:h-10 mr-3" href="/">
+                    <img src="https://s21.ax1x.com/2025/07/15/pV11zb4.png" class="w-full h-full rounded-sm">
+                </a>
+            
+            <a class="logo-title" href="/">
+                
+                缘来是这样的吗
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-dvh w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+
+            
+            
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/archives"
+                        >
+                            <span>文章</span>
+                            <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/tags"
+                        >
+                            <span>标签</span>
+                            <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/categories"
+                        >
+                            <span>类别</span>
+                            <i class="fa-regular fa-folder fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">
+            27
+        </div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20"
+        href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">
+            12
+        </div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20"
+        href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">
+            7
+        </div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+		</div>
+
+		<div class="main-content-body transition-fade-up">
+			
+
+			<div class="main-content">
+				<div class="post-page-container flex relative justify-between box-border w-full h-full">
+	<div class="article-content-container">
+
+		<div class="article-title relative w-full">
+			
+			<div class="w-full flex items-center pt-6 justify-start">
+				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">Python 魔法：一键让 Excel 正确选项「脸红」</h1>
+			</div>
+			
+		</div>
+
+		
+		<div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+			<div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+				<img src="https://s21.ax1x.com/2025/07/04/pVKlaSe.jpg">
+			</div>
+			<div class="info flex flex-col justify-between">
+				<div class="author flex items-center">
+					<span class="name text-default-text-color text-lg font-semibold">BinkaiXu</span>
+					
+					<span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1"></span>
+					
+				</div>
+				<div class="meta-info">
+					<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2025-07-15 17:21:07</span>
+        <span class="mobile">2025-07-15 17:21:07</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2025-07-16 09:50:49</span>
+            <span class="mobile">2025-07-16 09:50:49</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/PDF-%E5%A4%84%E7%90%86/">PDF 处理</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/PDF-%E5%A4%84%E7%90%86/Python/">Python</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/PDF-%E5%A4%84%E7%90%86/Python/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/">数据处理</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Python/">Python</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/PyMuPDF/">PyMuPDF</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/PDF/">PDF</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E6%B0%B4%E5%8D%B0%E5%8E%BB%E9%99%A4/">水印去除</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E7%89%B9%E5%BE%81%E8%AF%86%E5%88%AB/">特征识别</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86/">文本处理</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>8.7k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>38 分钟</span>
+        </span>
+    
+    
+</div>
+
+				</div>
+			</div>
+		</div>
+		
+
+		
+
+
+		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+			<p>在日常工作中，我们经常会遇到带有特定特征的 PDF 水印，比如固定的字体大小、倾斜角度、透明度和颜色。这些特性为我们提供了更精准地识别水印的依据。今天，我们就来深入探讨如何利用 PyMuPDF (Fitz) 库，基于这些特征实现 PDF 水印的精确识别和去除，并整合多种实用方法，帮你应对不同场景。</p>
+<p>特定特征水印的识别原理</p>
+<p>PDF 文件中的文本和图形对象都包含了丰富的元数据信息，例如字体大小、旋转角度、透明度和颜色。当水印具有固定特征时，我们可以通过以下步骤实现精准识别：</p>
+<ol>
+<li><p><strong>解析 PDF 页面内容</strong>： 获取页面上所有的文本和图形对象。</p>
+</li>
+<li><p><strong>提取对象特征</strong>： 获取每个对象的字体大小、旋转角度、透明度和颜色等信息。</p>
+</li>
+<li><p><strong>特征匹配</strong>： 将提取到的特征与我们已知的水印特征进行比对。</p>
+</li>
+<li><p><strong>处理匹配对象</strong>： 对符合水印特征的对象进行删除或覆盖处理。</p>
+</li>
+</ol>
+<p>典型的 PDF 水印通常具备以下特征：</p>
+<ul>
+<li><p>📐 固定倾斜角度 (常见 15-45 度)</p>
+</li>
+<li><p>🎨 固定颜色 (常见浅灰色 #C0C0C0)</p>
+</li>
+<li><p>🌫 固定透明度 (约 30-50%)</p>
+</li>
+<li><p>🔠 固定字体大小 (通常较大)</p>
+</li>
+<li><p>🔄 重复出现在每一页相同位置</p>
+</li>
+</ul>
+<p>使用 PyMuPDF 实现基于特征的水印处理</p>
+<h3 id="方法一：基于字体大小和旋转角度的水印识别-xA"><a href="#方法一：基于字体大小和旋转角度的水印识别-xA" class="headerlink" title="方法一：基于字体大小和旋转角度的水印识别&#xA;"></a>方法一：基于字体大小和旋转角度的水印识别&#xA;</h3><p>这个方法非常适合那些字体大小和倾斜角度都比较固定的水印。</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line">import fitz</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def remove\_watermark\_by\_font\_size\_and\_rotation(input\_pdf, output\_pdf, font\_size, rotation\_angle):</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   根据字体大小和旋转角度去除PDF中的水印。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   参数:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   input\_pdf (str): 输入PDF文件路径</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   output\_pdf (str): 输出PDF文件路径</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   font\_size (float): 水印字体大小</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   rotation\_angle (float): 水印旋转角度 (度)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">&amp;#x20;   doc = fitz.open(input\_pdf)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   for page in doc:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 获取页面上的所有文本和它们的属性</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       text\_infos = page.get\_text(&quot;dict&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       for block in text\_infos\[&quot;blocks&quot;]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;           if &quot;lines&quot; in block:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;               for line in block\[&quot;lines&quot;]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                   for span in line\[&quot;spans&quot;]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       \# 提取字体大小和旋转角度</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       current\_size = span\[&quot;size&quot;]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       \# 计算旋转角度 (PyMuPDF中通过变换矩阵计算)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       matrix = fitz.Matrix(span\[&quot;matrix&quot;])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       \# matrix.decompose() 返回 (a, b, c, d, e, f)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       \# 旋转角度通过 atan2(b, a) 或 atan2(-c, d) 计算。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       \# 对于简单的旋转，alpha 和 beta 应该近似相等或互补。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       \# 这里我们简化，直接使用 atan2(matrix.b, matrix.a) 转换成角度</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       import math</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       current\_rotation = math.degrees(math.atan2(matrix.b, matrix.a))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       \# 检查是否匹配水印特征，并允许一定的误差</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       if (abs(current\_size - font\_size) &lt; 1.5 and # 允许轻微误差</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                           abs(current\_rotation - rotation\_angle) &lt; 5.0): # 允许5度误差</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                           \# 创建一个矩形区域用于覆盖水印</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                           page.add\_redact\_annot(fitz.Rect(span\[&quot;bbox&quot;]), text=&quot;&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 应用所有编辑</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       page.apply\_redactions()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   \# 保存修改后的PDF</span><br><span class="line"></span><br><span class="line">&amp;#x20;   doc.save(output\_pdf)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   doc.close()</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>代码解析</strong>：</p>
+<ul>
+<li><p>我们使用 <code>page.get_text(&quot;dict&quot;)</code> 获取页面上所有的文本信息，包括它们的各种属性。</p>
+</li>
+<li><p>从文本跨度 (span) 中提取 字体大小 和 变换矩阵。</p>
+</li>
+<li><p>通过分解变换矩阵来计算文本的 旋转角度。这里使用了 <code>math.atan2(matrix.b, matrix.a)</code> 来更准确地获取旋转角度。</p>
+</li>
+<li><p>将提取到的特征与你已知的水印特征进行比较，如果匹配（并允许一定的误差范围），就用一个空白矩形覆盖水印区域。</p>
+</li>
+</ul>
+<p><strong>难易度</strong>：★★★☆☆</p>
+<p><strong>优点</strong>： 对具有固定字体大小和倾斜角度的水印效果特别好，误判率低。</p>
+<p><strong>缺点</strong>： 需要你预先知道水印的字体大小和旋转角度参数。</p>
+<h3 id="方法二：基于透明度和颜色的水印识别-xA"><a href="#方法二：基于透明度和颜色的水印识别-xA" class="headerlink" title="方法二：基于透明度和颜色的水印识别&#xA;"></a>方法二：基于透明度和颜色的水印识别&#xA;</h3><p>这种方法适用于那些有固定透明度和颜色的水印，特别是半透明的浅色水印。</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br></pre></td><td class="code"><pre><span class="line">import fitz</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def remove\_watermark\_by\_opacity\_and\_color(input\_pdf, output\_pdf, opacity\_threshold, color\_rgb\_target, color\_tolerance=10):</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   根据透明度和颜色去除PDF中的水印。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   参数:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   input\_pdf (str): 输入PDF文件路径</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   output\_pdf (str): 输出PDF文件路径</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   opacity\_threshold (float): 水印透明度阈值 (0.0-1.0)，低于此值可能认为是水印</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   color\_rgb\_target (tuple): 水印颜色的RGB值，如 (200, 200, 200)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   color\_tolerance (int): 颜色匹配的容差范围 (0-255)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">&amp;#x20;   doc = fitz.open(input\_pdf)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   for page in doc:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 获取页面上所有的绘图指令</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# PyMuPDF 直接从get\_text(&quot;dict&quot;)获取的span里没有透明度信息，</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 透明度通常是在图形状态(graphics state)中设置的，需要解析PDF内容流才能获取。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 这里为了演示，我们假设透明度信息可以通过更复杂的解析获得，</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 或者通过图像渲染后分析像素来实现。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 简化处理：对于文本水印，通常颜色和位置是更可靠的特征。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 如果需要精确的透明度识别，需要更深入的PDF内容流解析。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 遍历页面上的所有文本</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       text\_infos = page.get\_text(&quot;dict&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       for block in text\_infos\[&quot;blocks&quot;]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;           if &quot;lines&quot; in block:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;               for line in block\[&quot;lines&quot;]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                   for span in line\[&quot;spans&quot;]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       \# 提取颜色信息</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       color\_int = span\[&quot;color&quot;]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       r = (color\_int &gt;&gt; 16) &amp; 0xFF</span><br><span class="line"></span><br><span class="line">&amp;#x20;                       g = (color\_int &gt;&gt; 8) &amp; 0xFF</span><br><span class="line"></span><br><span class="line">&amp;#x20;                       b = color\_int &amp; 0xFF</span><br><span class="line"></span><br><span class="line">&amp;#x20;                       current\_color\_rgb = (r, g, b)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       \# 在PyMuPDF的文本span信息中直接获取透明度是比较复杂的，</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       \# 因为透明度是图形状态的一部分，而不是文本本身的一个属性。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       \# 对于真正的透明度匹配，通常需要渲染页面并分析像素的alpha通道，</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       \# 或者解析更底层的PDF内容流。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       \# 为了演示，我们在这里简化，假设所有文本都是不透明的，</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       \# 除非通过其他方式确认其透明度。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       \# 如果 watermark 是图像，则需要用其他方法处理。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       \# 判断颜色是否匹配目标颜色（带容差）</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       color\_match = (</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                           abs(current\_color\_rgb\[0] - color\_rgb\_target\[0]) &lt;= color\_tolerance and</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                           abs(current\_color\_rgb\[1] - color\_rgb\_target\[1]) &lt;= color\_tolerance and</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                           abs(current\_color\_rgb\[2] - color\_rgb\_target\[2]) &lt;= color\_tolerance</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       \# 这里没有透明度信息，所以暂时不作为判断条件</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       \# 如果你的水印是文本且颜色固定，这个方法会很有用</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       if color\_match: # 仅基于颜色匹配</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                           page.add\_redact\_annot(fitz.Rect(span\[&quot;bbox&quot;]), text=&quot;&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;      &amp;#x20;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 应用所有编辑</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       page.apply\_redactions()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   \# 保存修改后的PDF</span><br><span class="line"></span><br><span class="line">&amp;#x20;   doc.save(output\_pdf)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   doc.close()</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>代码解析</strong>：</p>
+<ul>
+<li><p>我们从文本跨度中提取 RGB 颜色值。</p>
+</li>
+<li><p>注意： 直接从 span 中提取透明度信息在 PyMuPDF 中比较复杂，因为它通常是 PDF 内容流中的图形状态参数。为了实现真正的透明度识别，你可能需要渲染页面为图像后分析像素的 alpha 通道，或者进行更复杂的 PDF 内容流解析。在上面的代码中，我暂时移除了透明度的判断，主要依赖颜色匹配。</p>
+</li>
+<li><p>比较提取的颜色与已知水印特征，并设置一个容差范围。</p>
+</li>
+</ul>
+<p><strong>难易度</strong>：★★★★☆</p>
+<p><strong>优点</strong>： 对具有固定颜色（特别是浅色）的水印效果好。</p>
+<p><strong>缺点</strong>： 透明度提取是难点，可能需要深入解析 PDF 内部结构或借助图像处理库。</p>
+<h3 id="方法三：综合多特征的水印识别-xA"><a href="#方法三：综合多特征的水印识别-xA" class="headerlink" title="方法三：综合多特征的水印识别&#xA;"></a>方法三：综合多特征的水印识别&#xA;</h3><p>当水印特征明确且固定时，这个方法能提供最高的识别准确性，因为它结合了多种特征进行判断。</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br></pre></td><td class="code"><pre><span class="line">import fitz</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">import math</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def remove\_watermark\_by\_multiple\_features(input\_pdf, output\_pdf,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                                         font\_size, rotation\_angle,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                                         color\_rgb,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                                         size\_tolerance=1.5, rotation\_tolerance=5.0, color\_tolerance=10):</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   根据多种特征组合去除PDF中的水印。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   不包含透明度参数，因为直接从text span获取透明度复杂。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   参数:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   input\_pdf (str): 输入PDF文件路径</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   output\_pdf (str): 输出PDF文件路径</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   font\_size (float): 水印字体大小</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   rotation\_angle (float): 水印旋转角度 (度)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   color\_rgb (tuple): 水印颜色的RGB值，如 (200, 200, 200)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   size\_tolerance (float): 字体大小匹配的容差</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   rotation\_tolerance (float): 旋转角度匹配的容差 (度)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   color\_tolerance (int): 颜色匹配的容差 (0-255)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">&amp;#x20;   doc = fitz.open(input\_pdf)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   for page in doc:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 获取页面上的所有文本和它们的属性</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       text\_infos = page.get\_text(&quot;dict&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       for block in text\_infos\[&quot;blocks&quot;]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;           if &quot;lines&quot; in block:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;               for line in block\[&quot;lines&quot;]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                   for span in line\[&quot;spans&quot;]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       \# 提取字体大小</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       current\_size = span\[&quot;size&quot;]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       \# 计算旋转角度</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       matrix = fitz.Matrix(span\[&quot;matrix&quot;])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       current\_rotation = math.degrees(math.atan2(matrix.b, matrix.a))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       \# 提取颜色信息</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       color\_int = span\[&quot;color&quot;]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       r = (color\_int &gt;&gt; 16) &amp; 0xFF</span><br><span class="line"></span><br><span class="line">&amp;#x20;                       g = (color\_int &gt;&gt; 8) &amp; 0xFF</span><br><span class="line"></span><br><span class="line">&amp;#x20;                       b = (color\_int) &amp; 0xFF</span><br><span class="line"></span><br><span class="line">&amp;#x20;                       current\_color\_rgb = (r, g, b)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       \# 综合多个特征进行匹配</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       size\_match = abs(current\_size - font\_size) &lt; size\_tolerance</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       rotation\_match = abs(current\_rotation - rotation\_angle) &lt; rotation\_tolerance</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       color\_match = (</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                           abs(current\_color\_rgb\[0] - color\_rgb\[0]) &lt;= color\_tolerance and</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                           abs(current\_color\_rgb\[1] - color\_rgb\[1]) &lt;= color\_tolerance and</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                           abs(current\_color\_rgb\[2] - color\_rgb\[2]) &lt;= color\_tolerance</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       \# 如果所有特征都匹配，则认为是水印</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       if size\_match and rotation\_match and color\_match:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                           \# 创建一个矩形区域用于覆盖水印</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                           page.add\_redact\_annot(fitz.Rect(span\[&quot;bbox&quot;]), text=&quot;&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 应用所有编辑</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       page.apply\_redactions()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   \# 保存修改后的PDF</span><br><span class="line"></span><br><span class="line">&amp;#x20;   doc.save(output\_pdf)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   doc.close()</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>代码解析</strong>：</p>
+<ul>
+<li><p>综合提取字体大小、旋转角度和颜色三个特征（为了简化和实用性，移除了直接在 span 中获取的透明度判断）。</p>
+</li>
+<li><p>设置了合理的匹配容差范围，你可以根据实际情况调整这些容差值。</p>
+</li>
+<li><p>只有当所有选定的特征都匹配时才判定为水印，这大大提高了识别的准确性。</p>
+</li>
+</ul>
+<p><strong>难易度</strong>：★★★★★</p>
+<p><strong>优点</strong>： 识别准确性高，误判率极低。</p>
+<p><strong>缺点</strong>： 实现相对复杂，需要精确的水印特征参数。</p>
+<h3 id="方法四：基于文本特征的直接删除法-xA"><a href="#方法四：基于文本特征的直接删除法-xA" class="headerlink" title="方法四：基于文本特征的直接删除法&#xA;"></a>方法四：基于文本特征的直接删除法&#xA;</h3><p>如果你知道水印的具体文本内容，或者可以通过一些简单的文本属性来识别，这个方法最直接、最快速。</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br></pre></td><td class="code"><pre><span class="line">import fitz</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def is\_watermark\_span(span, target\_text=None, min\_size=None, max\_size=None, target\_color\_rgb=None, color\_tolerance=10):</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   判断文本跨度是否为水印，可根据实际情况自定义判断条件。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   参数:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   span (dict): 文本跨度字典</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   target\_text (str): 可选，要匹配的水印文本内容</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   min\_size (float): 可选，水印字体最小尺寸</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   max\_size (float): 可选，水印字体最大尺寸</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   target\_color\_rgb (tuple): 可选，水印颜色的RGB值</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   color\_tolerance (int): 颜色匹配的容差 (0-255)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">&amp;#x20;   \# 示例：判断字体大小、颜色等特征</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   \# 可以根据实际情况组合多个条件</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;  &amp;#x20;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   \# 字体大小判断</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   size\_match = True</span><br><span class="line"></span><br><span class="line">&amp;#x20;   if min\_size is not None and span\[&quot;size&quot;] &lt; min\_size:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       size\_match = False</span><br><span class="line"></span><br><span class="line">&amp;#x20;   if max\_size is not None and span\[&quot;size&quot;] &gt; max\_size:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       size\_match = False</span><br><span class="line"></span><br><span class="line">&amp;#x20;   \# 文本内容判断</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   text\_match = True</span><br><span class="line"></span><br><span class="line">&amp;#x20;   if target\_text is not None and target\_text.lower() not in span\[&quot;text&quot;].lower():</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       text\_match = False</span><br><span class="line"></span><br><span class="line">&amp;#x20;  &amp;#x20;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   \# 颜色判断</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   color\_match = True</span><br><span class="line"></span><br><span class="line">&amp;#x20;   if target\_color\_rgb is not None:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       color\_int = span\[&quot;color&quot;]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       r = (color\_int &gt;&gt; 16) &amp; 0xFF</span><br><span class="line"></span><br><span class="line">&amp;#x20;       g = (color\_int &gt;&gt; 8) &amp; 0xFF</span><br><span class="line"></span><br><span class="line">&amp;#x20;       b = color\_int &amp; 0xFF</span><br><span class="line"></span><br><span class="line">&amp;#x20;       current\_color\_rgb = (r, g, b)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;      &amp;#x20;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       if not (abs(current\_color\_rgb\[0] - target\_color\_rgb\[0]) &lt;= color\_tolerance and</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;               abs(current\_color\_rgb\[1] - target\_color\_rgb\[1]) &lt;= color\_tolerance and</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;               abs(current\_color\_rgb\[2] - target\_color\_rgb\[2]) &lt;= color\_tolerance):</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;           color\_match = False</span><br><span class="line"></span><br><span class="line">&amp;#x20;   return size\_match and text\_match and color\_match</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def remove\_watermark\_by\_text\_features(doc\_path, output\_path, \*\*kwargs):</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   根据文本特征去除PDF中的水印。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   参数:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   doc\_path (str): 输入PDF文件路径</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   output\_path (str): 输出PDF文件路径</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   \*\*kwargs: 传递给 is\_watermark\_span 函数的参数，如 target\_text, min\_size, max\_size, target\_color\_rgb</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">&amp;#x20;   doc = fitz.open(doc\_path)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   for page in doc:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 搜索符合水印特征的文本</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       for block in page.get\_text(&quot;dict&quot;)\[&quot;blocks&quot;]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;           if block\[&quot;type&quot;] == 0:  # 文本块</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;               for line in block\[&quot;lines&quot;]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                   for span in line\[&quot;spans&quot;]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       if is\_watermark\_span(span,\*\* kwargs):  # 自定义判断函数</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                           page.add\_redact\_annot(span\[&quot;bbox&quot;])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       page.apply\_redactions()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   doc.save(output\_path)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   doc.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">\# 示例用法</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">\# remove\_watermark\_by\_text\_features(&quot;input.pdf&quot;, &quot;output.pdf&quot;, target\_text=&quot;CONFIDENTIAL&quot;, min\_size=10, max\_size=14, target\_color\_rgb=(204, 204, 204))</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>代码解析</strong>：</p>
+<ul>
+<li><p>通过一个可自定义的 <code>is_watermark_span</code> 函数直接搜索符合特定文本特征的水印内容。</p>
+</li>
+<li><p>你可以传入 <code>target_text</code>、<code>min_size</code>、<code>max_size</code> 和 <code>target_color_rgb</code> 等参数来精确定义水印的特征。</p>
+</li>
+<li><p>对判定为水印的文本进行覆盖处理。</p>
+</li>
+</ul>
+<p><strong>难易度</strong>：★★☆☆☆</p>
+<p><strong>优点</strong>： 实现简单，处理速度快，非常适合处理简单的文本水印。</p>
+<p><strong>缺点</strong>： 仅适用于文本水印，无法处理图像水印。</p>
+<h3 id="方法五：基于混合特征的高级识别法-xA"><a href="#方法五：基于混合特征的高级识别法-xA" class="headerlink" title="方法五：基于混合特征的高级识别法&#xA;"></a>方法五：基于混合特征的高级识别法&#xA;</h3><p>对于更复杂的 PDF 水印（例如包含文本和图像），这种方法结合了文本和图像特征识别，能够提供更高的识别精度。请注意，图像处理部分需要 numpy 和 opencv-python 库。</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br></pre></td><td class="code"><pre><span class="line">import fitz</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">import cv2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">\# Placeholder for actual watermark text detection logic</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def is\_watermark\_text(span):</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   判断文本跨度是否为水印。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   你可以根据实际情况在这里实现更复杂的文本水印判断逻辑，</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   例如基于字体、颜色、大小、位置、重复性等。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">&amp;#x20;   \# 示例：假设所有满足特定尺寸和颜色的文本都是水印</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   \# 真实应用中，你需要更精确的逻辑</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   color\_int = span\[&quot;color&quot;]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   r = (color\_int &gt;&gt; 16) &amp; 0xFF</span><br><span class="line"></span><br><span class="line">&amp;#x20;   g = (color\_int &gt;&gt; 8) &amp; 0xFF</span><br><span class="line"></span><br><span class="line">&amp;#x20;   b = color\_int &amp; 0xFF</span><br><span class="line"></span><br><span class="line">&amp;#x20;  &amp;#x20;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   \# 假设水印是浅灰色，字体较大</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   if (100 &lt;= r &lt;= 220 and 100 &lt;= g &lt;= 220 and 100 &lt;= b &lt;= 220) and span\[&quot;size&quot;] &gt; 15:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       return True</span><br><span class="line"></span><br><span class="line">&amp;#x20;   return False</span><br><span class="line"></span><br><span class="line">def process\_watermark\_regions(page, text\_spans\_to\_redact, image\_regions\_to\_redact):</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   处理识别到的水印区域。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">&amp;#x20;   \# 对文本水印区域进行处理</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   for span\_bbox in text\_spans\_to\_redact:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       page.add\_redact\_annot(fitz.Rect(span\_bbox))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   \# 对图像水印区域进行处理</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   for region\_bbox in image\_regions\_to\_redact:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       page.add\_redact\_annot(fitz.Rect(region\_bbox))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   page.apply\_redactions()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def advanced\_watermark\_removal(doc\_path, output\_path, watermark\_template\_path=None):</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   根据混合特征（文本和图像）去除PDF中的水印。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   参数:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   doc\_path (str): 输入PDF文件路径</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   output\_path (str): 输出PDF文件路径</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   watermark\_template\_path (str): 可选，水印图像模板的路径，用于SIFT特征匹配。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">&amp;#x20;   doc = fitz.open(doc\_path)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;  &amp;#x20;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   watermark\_template = None</span><br><span class="line"></span><br><span class="line">&amp;#x20;   if watermark\_template\_path:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# Load watermark template in grayscale for SIFT</span><br><span class="line"></span><br><span class="line">&amp;#x20;       watermark\_template = cv2.imread(watermark\_template\_path, cv2.IMREAD\_GRAYSCALE)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       if watermark\_template is None:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;           print(f&quot;警告：无法加载水印模板图像：&#123;watermark\_template\_path&#125;&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;           watermark\_template\_path = None # Disable image matching if template fails to load</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   sift = cv2.SIFT\_create()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   kp1, des1 = None, None</span><br><span class="line"></span><br><span class="line">&amp;#x20;   if watermark\_template\_path and watermark\_template is not None:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       kp1, des1 = sift.detectAndCompute(watermark\_template, None)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;  &amp;#x20;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   for page in doc:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       text\_spans\_to\_redact = \[]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       image\_regions\_to\_redact = \[]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 第一步：文本特征识别</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       text\_infos = page.get\_text(&quot;dict&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       for block in text\_infos\[&quot;blocks&quot;]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;           if &quot;lines&quot; in block:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;               for line in block\[&quot;lines&quot;]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                   for span in line\[&quot;spans&quot;]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       if is\_watermark\_text(span): # 检查字体/颜色等</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                           text\_spans\_to\_redact.append(span\[&quot;bbox&quot;])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;      &amp;#x20;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 第二步：图像特征识别 (如果提供了水印模板)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       if watermark\_template\_path and watermark\_template is not None and des1 is not None:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;           pix = page.get\_pixmap(matrix=fitz.Matrix(2,2)) # 提高渲染分辨率以便更好的特征检测</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;           img = cv2.cvtColor(np.frombuffer(pix.samples, np.uint8).reshape(</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;               pix.h, pix.w, pix.n), cv2.COLOR\_RGB2GRAY) # 转为灰度图进行特征检测</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;           kp2, des2 = sift.detectAndCompute(img, None)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;           if des2 is not None and len(des1) &gt; 0 and len(des2) &gt; 0:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;               \# 特征匹配</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;               matcher = cv2.BFMatcher()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;               matches = matcher.knnMatch(des1, des2, k=2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;              &amp;#x20;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;               \# 筛选良好的匹配点</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;               good\_matches = \[]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;               for m, n in matches:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                   if m.distance &lt; 0.75 \* n.distance: # 0.75是经验值，可调</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       good\_matches.append(m)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;              &amp;#x20;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;               \# 如果匹配点足够多，则认为存在图像水印</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;               if len(good\_matches) &gt; 10: # 至少需要10个好的匹配点</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                   \# 尝试找到水印在页面上的大致位置</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                   src\_pts = np.float32(\[kp1\[m.queryIdx].pt for m in good\_matches]).reshape(-1, 1, 2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                   dst\_pts = np.float32(\[kp2\[m.trainIdx].pt for m in good\_matches]).reshape(-1, 1, 2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                  &amp;#x20;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                   \# 使用 findHomography 找到变换矩阵</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                   M, mask = cv2.findHomography(src\_pts, dst\_pts, cv2.RANSAC, 5.0)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                  &amp;#x20;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                   if M is not None:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       h, w = watermark\_template.shape</span><br><span class="line"></span><br><span class="line">&amp;#x20;                       pts = np.float32(\[\[0, 0], \[0, h-1], \[w-1, h-1], \[w-1, 0]]).reshape(-1, 1, 2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                      &amp;#x20;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       \# 应用变换矩阵，得到水印在页面上的四个角点</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       dst = cv2.perspectiveTransform(pts, M)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                      &amp;#x20;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       \# 计算水印区域的边界框</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       min\_x = int(np.min(dst\[:, 0, 0]) / pix.matrix.a) # 还原到原始PDF坐标</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       min\_y = int(np.min(dst\[:, 0, 1]) / pix.matrix.d)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       max\_x = int(np.max(dst\[:, 0, 0]) / pix.matrix.a)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       max\_y = int(np.max(dst\[:, 0, 1]) / pix.matrix.d)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                      &amp;#x20;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                       image\_regions\_to\_redact.append((min\_x, min\_y, max\_x, max\_y))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 综合处理文本和图像水印</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       process\_watermark\_regions(page, text\_spans\_to\_redact, image\_regions\_to\_redact)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   doc.save(output\_path)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   doc.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">\# 示例用法（需要准备一个 watermark\_template.png 图片作为水印模板）</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">\# advanced\_watermark\_removal(&quot;input.pdf&quot;, &quot;output.pdf&quot;, &quot;watermark\_template.png&quot;)</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>代码解析</strong>：</p>
+<ul>
+<li><p><strong>文本特征识别</strong>： 沿用了之前 <code>is_watermark_text</code> 的概念，但你需要根据实际水印特性来完善这个逻辑。</p>
+</li>
+<li><p><strong>图像特征识别</strong>：</p>
+<ul>
+<li><p>将 PDF 页面渲染为图像，并转换为灰度图，以便进行特征检测。</p>
+</li>
+<li><p>使用 SIFT 算法（或其他特征匹配算法如 ORB, SURF）来检测并匹配图像水印模板。</p>
+</li>
+<li><p>通过 <code>findHomography</code> 计算水印在页面上的变换，从而确定水印的精确位置和边界框。</p>
+</li>
+<li><p>注意： 图像处理库 (如 OpenCV) 通常在像素坐标系下操作，你需要将检测到的像素坐标转换回 PyMuPDF 使用的 PDF 坐标。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>综合处理</strong>： 将文本和图像识别的结果结合起来，对所有识别出的水印区域进行处理。</p>
+</li>
+</ul>
+<p><strong>难易度</strong>：★★★★☆</p>
+<p><strong>优点</strong>： 识别精度高，适用于复杂水印环境（文本与图像混合），鲁棒性强。</p>
+<p><strong>缺点</strong>： 实现复杂，需要水印模板，处理速度相对较慢，需要额外的图像处理库。</p>
+<h3 id="方法六：基于-PDF-底层结构的终极方案-xA"><a href="#方法六：基于-PDF-底层结构的终极方案-xA" class="headerlink" title="方法六：基于 PDF 底层结构的终极方案&#xA;"></a>方法六：基于 PDF 底层结构的终极方案&#xA;</h3><p>这种方法最为彻底，因为它直接操作 PDF 文件的底层结构。但它也要求你对 PDF 规范有深入的了解，操作不当可能会导致文件损坏。</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br></pre></td><td class="code"><pre><span class="line">import fitz</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def deep\_watermark\_removal(doc\_path, output\_path):</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   通过直接操作PDF的XObject和内容流，尝试去除水印。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   这是一种更底层、更彻底的方式，但需要对PDF结构有一定了解。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   注意：此方法可能非常具体，不适用于所有水印类型，且操作不当可能损坏PDF。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">&amp;#x20;   doc = fitz.open(doc\_path)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;  &amp;#x20;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   for page\_num, page in enumerate(doc):</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 尝试通过删除XObject（外部对象，可能是图像或Form XObject）来去除水印</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 这需要猜测哪些XObject是水印。通常水印是透明的或在底层。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# PyMuPDF没有直接的 delete\_object 方法，通常的做法是重新构建内容流或用add\_redact\_annot。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 如果水印是作为独立XObject嵌入的，你可以尝试识别并替换页面内容流中对它们的引用。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 这是一个非常高级且风险高的操作，这里我们不直接修改XObject，而是依赖redaction。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;      &amp;#x20;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 另一种思路是检查页面内容流中是否存在特定的操作符，例如设置透明度或特定颜色。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 但这需要更深入的解析内容流。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;      &amp;#x20;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 目前PyMuPDF没有直接暴露修改/删除底层XObject的API，</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# add\_redact\_annot 是最安全和推荐的方式来“删除”页面内容。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 如果水印是文本，可以结合方法1-4来识别。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 如果水印是图像，但不是作为XObject直接插入，而是作为背景，则需要渲染后处理。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 示例：尝试查找并删除名称中可能包含“Watermark”的Form XObject引用</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 这是一个象征性的操作，实际操作会复杂得多。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;      &amp;#x20;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 获取页面的内容流</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \#contents = page.get\_contents() # 这是内容流的列表，每个元素是一个对象ID</span><br><span class="line"></span><br><span class="line">&amp;#x20;       \#for item\_id in contents:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \#    item\_obj = doc.get\_pdf\_object(item\_id) # 获取实际的PDF对象</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \#    if item\_obj:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \#        content\_bytes = item\_obj.read()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \#        # 检查内容流中是否有水印相关的指令，例如 /DeviceGray Cs, /CA 0.x, /ca 0.x</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \#        # 这是一个高度定制化的过程，取决于水印是如何被创建的。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \#        # 通常水印文本会使用特定的字体、颜色和透明度设置。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \#        # 我们可以尝试替换掉这些设置或其相关的文本/图像绘图指令。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \#        # 例如，如果水印被标记为 /Watermark，可以尝试移除这个标记</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \#        # 警告：直接修改内容流非常危险，可能导致PDF损坏。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \#        # content\_stream = content\_bytes.replace(b&quot;/Watermark&quot;, b&quot;&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \#        # 如果内容流对象是可写的，可以尝试更新它</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \#        # doc.update\_object(item\_id, content\_stream)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \#        pass # 实际不执行直接修改，而是使用更安全的redaction</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 由于PyMuPDF没有直接删除XObject的简单API，并且直接修改内容流风险高，</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 这种“终极方案”通常指的是在更底层的PDF解析库中实现。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 在PyMuPDF的语境下，最安全和推荐的“底层”处理是使用 redact\_annot 来覆盖。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 如果水印是作为 Form XObject 嵌入，且它们是半透明的，</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# PyMuPDF 的 page.get\_text(&quot;dict&quot;) 或 page.get\_images() 可能无法直接识别。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 此时，可能需要：</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 1. 遍历页面所有对象（PyMuPDF不直接提供此功能，除非通过高级解析）。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 2. 渲染页面并进行图像处理，识别水印区域，然后进行 redact。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;      &amp;#x20;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 总结：此方法在PyMuPDF中实现非常困难且不推荐，除非对PDF内部结构有极深理解。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 推荐使用前面更安全、更易于控制的基于特征的redaction方法。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 为了让这个函数有实际意义，我们可以让它在非常明确的情况下执行redaction</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 例如，如果你知道水印是某个特定名称的Form XObject，但通常PyMuPDF不直接暴露这个</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       print(f&quot;Warning: Method 6 (deep\_watermark\_removal) in PyMuPDF is generally not feasible for direct object deletion without significant PDF internal structure parsing and modification, which is outside the scope of simple PyMuPDF APIs. Using redaction is the recommended safe approach.&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 如果水印是透明度很高的图像，可能需要渲染页面然后用图像处理来识别并redact</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 这里为了避免误导，不提供具体实现，仅保留框架。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   doc.save(output\_path)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   doc.close()</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>代码解析</strong>：</p>
+<ul>
+<li><p>这个方法旨在直接操作 PDF 的 XObject (外部对象，可以是图像或 Form XObject) 和内容流。</p>
+</li>
+<li><p><strong>重要提示</strong>： PyMuPDF (Fitz) 并没有直接暴露修改或删除底层 PDF 对象的 API。 <code>add_redact_annot</code> 是 PyMuPDF 中最安全和推荐的方式来 “删除” 页面内容的。直接修改 PDF 的底层内容流非常危险，操作不当很可能导致 PDF 文件损坏且无法打开。</p>
+</li>
+<li><p>因此，我调整了此方法的描述和代码示例，强调其复杂性和风险，并指出在 PyMuPDF 中，更推荐使用 <code>add_redact_annot</code> 来实现 “删除” 效果。如果你真的需要深入到 PDF 底层修改，可能需要更专业的 PDF 处理库或对 PDF 规范有极其深入的了解。</p>
+</li>
+</ul>
+<p><strong>难易度</strong>：★★★★★ (理论上)</p>
+<p><strong>优点</strong>： 理论上可以彻底清除不留痕迹，适用于各种类型水印。</p>
+<p><strong>缺点</strong>： 实现非常复杂，需要深入的 PDF 结构知识，且在 PyMuPDF 中直接实现此类操作难度极高且风险大。</p>
+<p>方法对比与选择建议</p>
+<table>
+<thead>
+<tr>
+<th>方法&#xA;</th>
+<th>难易度&#xA;</th>
+<th>适用场景&#xA;</th>
+<th>关键优势&#xA;</th>
+<th>局限性&#xA;</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>字体大小 + 旋转角度&#xA;</td>
+<td>★★★☆☆&#xA;</td>
+<td>水印有固定大小和倾斜角度&#xA;</td>
+<td>实现相对简单，识别准确率较高&#xA;</td>
+<td>需要精确的大小和角度参数&#xA;</td>
+</tr>
+<tr>
+<td>透明度 + 颜色&#xA;</td>
+<td>★★★★☆&#xA;</td>
+<td>水印有固定颜色（特别是浅色）&#xA;</td>
+<td>对浅色水印效果好&#xA;</td>
+<td>透明度提取是难点，可能需要深入解析 PDF 内部结构或借助图像处理库&#xA;</td>
+</tr>
+<tr>
+<td>多特征综合&#xA;</td>
+<td>★★★★★&#xA;</td>
+<td>水印特征明确且固定&#xA;</td>
+<td>识别准确性高，误判率极低&#xA;</td>
+<td>实现相对复杂，需要精确的水印特征参数&#xA;</td>
+</tr>
+<tr>
+<td>基于文本特征&#xA;</td>
+<td>★★☆☆☆&#xA;</td>
+<td>简单文本水印&#xA;</td>
+<td>实现简单，处理速度快&#xA;</td>
+<td>仅适用于文本水印，无法处理图像水印&#xA;</td>
+</tr>
+<tr>
+<td>混合特征识别&#xA;</td>
+<td>★★★★☆&#xA;</td>
+<td>复杂水印环境（文本与图像混合）&#xA;</td>
+<td>识别精度高&#xA;</td>
+<td>实现复杂，需要水印模板，处理速度慢&#xA;</td>
+</tr>
+<tr>
+<td>底层结构处理&#xA;</td>
+<td>★★★★★&#xA;</td>
+<td>各种类型水印&#xA;</td>
+<td>理论上最彻底&#xA;</td>
+<td>高风险，PyMuPDF 中难以直接实现，需要深厚知识&#xA;</td>
+</tr>
+</tbody></table>
+<p>特征参数提取方法</p>
+<p>在实际应用中，我们首先需要获取水印的特征参数。可以通过以下方式初步提取：</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br></pre></td><td class="code"><pre><span class="line">import fitz</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">import math</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">from collections import Counter</span><br><span class="line"></span><br><span class="line">def extract\_watermark\_features(pdf\_path, page\_num=0):</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   尝试提取PDF页面中可能的水印文本特征。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   此函数会返回页面中最常见的字体大小、旋转角度和颜色。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   这仅是一个初步分析工具，对于复杂水印可能需要人工确认或更复杂的统计。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   参数:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   pdf\_path (str): PDF文件路径</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   page\_num (int): 要分析的页面编号 (默认为第一页)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   返回:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   dict: 包含可能的水印特征的字典，如 &quot;font\_size&quot;, &quot;rotation\_angle&quot;, &quot;color\_rgb&quot;, &quot;opacity&quot;(占位)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">&amp;#x20;   doc = fitz.open(pdf\_path)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   page = doc\[page\_num]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   \# 用于存储可能的水印特征</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   possible\_font\_sizes = \[]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   possible\_rotations = \[]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   possible\_colors = \[]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   \# 获取页面上的所有文本和它们的属性</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   text\_infos = page.get\_text(&quot;dict&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   for block in text\_infos\[&quot;blocks&quot;]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       if &quot;lines&quot; in block:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;           for line in block\[&quot;lines&quot;]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;               for span in line\[&quot;spans&quot;]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                   \# 提取字体大小</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                   possible\_font\_sizes.append(round(span\[&quot;size&quot;], 1)) # 四舍五入到小数点后1位，便于统计</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                   \# 计算旋转角度</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                   matrix = fitz.Matrix(span\[&quot;matrix&quot;])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                   rotation = round(math.degrees(math.atan2(matrix.b, matrix.a)), 1) # 四舍五入，便于统计</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                   possible\_rotations.append(rotation)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                   \# 提取颜色信息</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                   color\_int = span\[&quot;color&quot;]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;                   r = (color\_int &gt;&gt; 16) &amp; 0xFF</span><br><span class="line"></span><br><span class="line">&amp;#x20;                   g = (color\_int &gt;&gt; 8) &amp; 0xFF</span><br><span class="line"></span><br><span class="line">&amp;#x20;                   b = color\_int &amp; 0xFF</span><br><span class="line"></span><br><span class="line">&amp;#x20;                   possible\_colors.append((r, g, b))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   \# 简单分析：找出最常见的特征值作为水印特征</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   \# 实际应用中可能需要更复杂的聚类分析或人工确认</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;  &amp;#x20;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   font\_size = None</span><br><span class="line"></span><br><span class="line">&amp;#x20;   if possible\_font\_sizes:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       font\_size = Counter(possible\_font\_sizes).most\_common(1)\[0]\[0]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   rotation\_angle = None</span><br><span class="line"></span><br><span class="line">&amp;#x20;   if possible\_rotations:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       rotation\_angle = Counter(possible\_rotations).most\_common(1)\[0]\[0]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 旋转角度可能为负，将其规范化到 0-360 度</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       if rotation\_angle &lt; 0:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;           rotation\_angle += 360</span><br><span class="line"></span><br><span class="line">&amp;#x20;   color\_rgb = None</span><br><span class="line"></span><br><span class="line">&amp;#x20;   if possible\_colors:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       color\_rgb = Counter(possible\_colors).most\_common(1)\[0]\[0]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   doc.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   return &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       &quot;font\_size&quot;: font\_size,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       &quot;rotation\_angle&quot;: rotation\_angle,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       &quot;color\_rgb&quot;: color\_rgb,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       &quot;opacity&quot;: 0.5  # 这是一个示例值，实际中透明度提取非常复杂，需要手动确认或更高级分析</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">\# 示例用法</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">\# features = extract\_watermark\_features(&quot;your\_watermarked\_document.pdf&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">\# print(features)</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>代码解析</strong>：</p>
+<ul>
+<li><p>此函数会遍历指定页面的所有文本跨度，收集它们的字体大小、旋转角度和颜色。</p>
+</li>
+<li><p>为了方便统计，对浮点数（大小和角度）进行了四舍五入。</p>
+</li>
+<li><p>使用 <code>collections.Counter</code> 找出最常见的字体大小、旋转角度和颜色，作为可能的水印特征。</p>
+</li>
+<li><p>注意： 提取透明度仍然是一个挑战，<code>opacity</code> 参数在此处仍作为占位符，需要通过其他方式（例如手动观察或更复杂的 PDF 内容流解析）来确定。</p>
+</li>
+</ul>
+<p>总结与最佳实践</p>
+<p>基于特征的 PDF 水印处理方法能够实现更精确的水印识别和去除，但这要求你对水印的特征有充分了解。在实际应用中，我建议你遵循以下最佳实践：</p>
+<ol>
+<li><p><strong>预处理分析</strong>： 首先使用 <code>extract_watermark_features</code> 函数分析水印特征，初步了解水印的字体大小、旋转角度、颜色等关键信息。必要时，手工观察水印，确认其透明度、具体文本内容或图像样式。</p>
+</li>
+<li><p><strong>从简到繁尝试</strong>： 从最简单的方法开始。如果水印是纯文本且特征明显，可以先尝试 基于文本特征的直接删除法。如果水印有固定的字体大小和倾斜角度，就用 基于字体大小和旋转角度的方法。只有当简单方法效果不佳时，再逐步增加特征维度，尝试 多特征综合识别。</p>
+</li>
+<li><p><strong>合理调整参数</strong>： 根据实际水印情况细致调整匹配容差值，在识别准确率和误判率之间取得最佳平衡。例如，对于字体大小，可以允许 1.0 到 2.0 的误差范围；对于旋转角度，可允许 3 到 5 度左右的误差。</p>
+</li>
+<li><p><strong>复杂场景组合</strong>： 对于包含多种类型水印的复杂 PDF，考虑结合多种方法进行处理。例如，对于既有文本又有图像的混合水印，可以结合 混合特征识别法。</p>
+</li>
+<li><p><strong>批量处理技巧</strong>： 如果你需要处理大量 PDF 文件，利用多线程或多进程可以显著提高处理效率。</p>
+</li>
+</ol>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line">from concurrent.futures import ThreadPoolExecutor</span><br><span class="line"></span><br><span class="line">import os</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def batch\_process\_pdfs(file\_list, output\_dir, \*\*watermark\_params):</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   批量处理PDF文件，使用多线程提高效率。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   参数:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   file\_list (list): 包含所有待处理PDF文件路径的列表</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   output\_dir (str): 处理后PDF文件的输出目录</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   \*\*watermark\_params: 传递给 remove\_watermark\_by\_multiple\_features 的水印特征参数</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">&amp;#x20;   os.makedirs(output\_dir, exist\_ok=True) # 确保输出目录存在</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   with ThreadPoolExecutor(max\_workers=os.cpu\_count()) as executor: # 使用CPU核心数作为最大工作线程数</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       futures = \[]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       for file\_path in file\_list:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;           file\_name = os.path.basename(file\_path)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;           output\_path = os.path.join(output\_dir, file\_name)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;           \# 提交任务到线程池</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;           futures.append(executor.submit(</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;               remove\_watermark\_by\_multiple\_features,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;               file\_path, output\_path,\*\* watermark\_params</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;           ))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       \# 等待所有任务完成</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       for future in futures:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;           try:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;               future.result() # 获取结果，如果任务有异常会在这里抛出</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;               print(f&quot;文件处理完成：&#123;file\_path&#125;&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;           except Exception as exc:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;               print(f&quot;文件 &#123;file\_path&#125; 处理时发生错误：&#123;exc&#125;&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">\# 示例用法</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">\# pdf\_files\_to\_process = \[&quot;doc1.pdf&quot;, &quot;doc2.pdf&quot;] # 你的PDF文件列表</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">\# output\_folder = &quot;processed\_pdfs&quot;</span><br><span class="line"></span><br><span class="line">\# watermark\_features = &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">\#     &quot;font\_size&quot;: 36.0,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">\#     &quot;rotation\_angle&quot;: 30.0,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">\#     &quot;color\_rgb&quot;: (192, 192, 192) # 浅灰色</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">\# &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">\# batch\_process\_pdfs(pdf\_files\_to\_process, output\_folder, \*\*watermark\_features)</span><br></pre></td></tr></table></figure></div>
+
+
+
+<ol>
+<li><strong>操作安全保障</strong>： 在处理任何重要文件之前，务必先备份原始文件！这能确保即使处理不当，你也不会丢失原始数据。同时，请始终遵守相关法律法规，仅处理你有权修改的文档，尊重知识产权和版权保护。</li>
+</ol>
+<p>通过合理选择和组合这些方法，你就能高效且精准地处理各种具有特定特征的 PDF 水印。</p>
+
+		</div>
+
+		
+
+		
+		<ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/Python/">#Python</a>&nbsp;
+			</li>
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/PyMuPDF/">#PyMuPDF</a>&nbsp;
+			</li>
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/PDF/">#PDF</a>&nbsp;
+			</li>
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/%E6%B0%B4%E5%8D%B0%E5%8E%BB%E9%99%A4/">#水印去除</a>&nbsp;
+			</li>
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/%E7%89%B9%E5%BE%81%E8%AF%86%E5%88%AB/">#特征识别</a>&nbsp;
+			</li>
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86/">#文本处理</a>&nbsp;
+			</li>
+			
+		</ul>
+		
+
+		
+
+		
+		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+			
+			<div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="prev" rel="prev" href="/2025/07/15/Python-%E9%AD%94%E6%B3%95%EF%BC%9A%E4%B8%80%E9%94%AE%E8%AE%A9-Excel-%E6%AD%A3%E7%A1%AE%E9%80%89%E9%A1%B9%E3%80%8C%E8%84%B8%E7%BA%A2%E3%80%8D/">
+					<span class="left arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-left"></i>
+					</span>
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item">Python 魔法：一键让 Excel 正确选项「脸红」</span>
+						<span class="post-nav-item">上一篇</span>
+					</span>
+				</a>
+			</div>
+			
+			
+			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="next" rel="next" href="/2025/07/15/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84%E7%88%AC%E8%99%AB%E7%94%9F%E6%B4%BB%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%BA%93%E5%BA%94%E7%94%A8/">
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item">从零开始的爬虫生活（一）：环境搭建与基础库应用</span>
+						<span class="post-nav-item">下一篇</span>
+					</span>
+					<span class="right arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-right"></i>
+					</span>
+				</a>
+			</div>
+			
+		</div>
+		
+
+
+		
+	</div>
+
+	
+	<div class="toc-content-container">
+		<div class="post-toc-wrap">
+	<div class="post-toc">
+		<div class="toc-title">目录</div>
+		<div class="page-title">Python 魔法：一键让 Excel 正确选项「脸红」</div>
+		<ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A%E5%9F%BA%E4%BA%8E%E5%AD%97%E4%BD%93%E5%A4%A7%E5%B0%8F%E5%92%8C%E6%97%8B%E8%BD%AC%E8%A7%92%E5%BA%A6%E7%9A%84%E6%B0%B4%E5%8D%B0%E8%AF%86%E5%88%AB-xA"><span class="nav-text">方法一：基于字体大小和旋转角度的水印识别
+</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A%E5%9F%BA%E4%BA%8E%E9%80%8F%E6%98%8E%E5%BA%A6%E5%92%8C%E9%A2%9C%E8%89%B2%E7%9A%84%E6%B0%B4%E5%8D%B0%E8%AF%86%E5%88%AB-xA"><span class="nav-text">方法二：基于透明度和颜色的水印识别
+</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%89%EF%BC%9A%E7%BB%BC%E5%90%88%E5%A4%9A%E7%89%B9%E5%BE%81%E7%9A%84%E6%B0%B4%E5%8D%B0%E8%AF%86%E5%88%AB-xA"><span class="nav-text">方法三：综合多特征的水印识别
+</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E5%9B%9B%EF%BC%9A%E5%9F%BA%E4%BA%8E%E6%96%87%E6%9C%AC%E7%89%B9%E5%BE%81%E7%9A%84%E7%9B%B4%E6%8E%A5%E5%88%A0%E9%99%A4%E6%B3%95-xA"><span class="nav-text">方法四：基于文本特征的直接删除法
+</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%94%EF%BC%9A%E5%9F%BA%E4%BA%8E%E6%B7%B7%E5%90%88%E7%89%B9%E5%BE%81%E7%9A%84%E9%AB%98%E7%BA%A7%E8%AF%86%E5%88%AB%E6%B3%95-xA"><span class="nav-text">方法五：基于混合特征的高级识别法
+</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E5%85%AD%EF%BC%9A%E5%9F%BA%E4%BA%8E-PDF-%E5%BA%95%E5%B1%82%E7%BB%93%E6%9E%84%E7%9A%84%E7%BB%88%E6%9E%81%E6%96%B9%E6%A1%88-xA"><span class="nav-text">方法六：基于 PDF 底层结构的终极方案
+</span></a></li></ol>
+
+	</div>
+</div>
+	</div>
+	
+</div>
+			</div>
+
+			
+		</div>
+
+		<div class="main-content-footer">
+			<footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+            <div class="customize-info my-1">人生有梦，各自精彩，加油！</div>
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2025</span>
+              -
+            
+            2025&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">BinkaiXu</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共撰写了 7 篇文章
+                    </span>
+                    
+                        <span>
+                            共 14.5k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.8.2</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+		</div>
+	</div>
+
+	
+	<div class="post-tools">
+		<div class="post-tools-container">
+	<ul class="article-tools-list">
+		<!-- TOC aside toggle -->
+		
+		<li class="right-bottom-tools page-aside-toggle">
+			<i class="fa-regular fa-outdent"></i>
+		</li>
+		
+
+		<!-- go comment -->
+		
+	</ul>
+</div>
+	</div>
+	
+
+	<div class="right-side-tools-container">
+		<div class="side-tools-container">
+	<ul class="hidden-tools-list">
+		<li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-plus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-minus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+			<i class="fa-regular fa-moon"></i>
+		</li>
+
+		<!-- rss -->
+		
+
+		
+		<li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+			<i class="fa-regular fa-arrow-up"></i>
+		</li>
+		
+
+		<li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+			<i class="fa-regular fa-arrow-down"></i>
+		</li>
+	</ul>
+
+	<ul class="visible-tools-list">
+		<li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+			<i class="fa-regular fa-cog fa-spin"></i>
+		</li>
+		
+		
+	</ul>
+</div>
+	</div>
+
+	<div class="image-viewer-container">
+	<img src="">
+</div>
+
+	
+	<div class="search-pop-overlay">
+	<div class="popup search-popup">
+		<div class="search-header">
+			<span class="search-input-field-pre">
+				<i class="fa-solid fa-keyboard"></i>
+			</span>
+			<div class="search-input-container">
+				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="站内搜索您需要的内容..." spellcheck="false" type="search" class="search-input">
+			</div>
+			<span class="popup-btn-close">
+				<i class="fa-solid fa-times"></i>
+			</span>
+		</div>
+		<div id="search-result">
+			<div id="no-result">
+				<i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+			</div>
+		</div>
+	</div>
+</div>
+	
+
+</main>
+
+
+
+<script src="/js/build/libs/Swup.min.js"></script>
+
+<script src="/js/build/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/build/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/build/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/build/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="/js/build/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+	
+<script src="/js/build/tools/imageViewer.js" type="module"></script>
+
+<script src="/js/build/utils.js" type="module"></script>
+
+<script src="/js/build/main.js" type="module"></script>
+
+<script src="/js/build/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/build/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/build/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/build/layouts/categoryList.js" type="module"></script>
+
+
+
+    
+<script src="/js/build/tools/localSearch.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/build/tools/codeBlock.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/build/layouts/lazyload.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/build/tools/runtime.js"></script>
+
+    
+<script src="/js/build/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/build/libs/Typed.min.js"></script>
+
+  
+<script src="/js/build/plugins/typed.js" type="module"></script>
+
+
+
+
+
+
+
+
+    
+<script src="/js/build/libs/anime.min.js"></script>
+
+
+
+
+
+    
+<script src="/js/build/tools/tocToggle.js" type="module" data-swup-reload-script=""></script>
+
+<script src="/js/build/layouts/toc.js" type="module" data-swup-reload-script=""></script>
+
+<script src="/js/build/plugins/tabs.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+<script src="/js/build/libs/moment-with-locales.min.js" data-swup-reload-script=""></script>
+
+
+<script src="/js/build/layouts/essays.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+
+	
+	<div id="aplayer"></div>
+
+<script src="/js/build/libs/APlayer.min.js"></script>
+
+
+<script src="/js/build/plugins/aplayer.js"></script>
+
+
+	
+</body>
+
+</html>
