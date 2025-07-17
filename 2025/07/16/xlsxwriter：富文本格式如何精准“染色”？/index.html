@@ -30,7 +30,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s21.ax1x.com/2025/07/15/pV13iP1.png">
 <meta property="article:published_time" content="2025-07-16T02:48:10.000Z">
-<meta property="article:modified_time" content="2025-07-17T01:06:24.425Z">
+<meta property="article:modified_time" content="2025-07-17T07:21:29.971Z">
 <meta property="article:author" content="XXXBK">
 <meta property="article:tag" content="Excel">
 <meta property="article:tag" content="Python">
@@ -283,8 +283,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2025-07-17 09:06:24</span>
-            <span class="mobile">2025-07-17 09:06:24</span>
+            <span class="desktop">2025-07-17 15:21:29</span>
+            <span class="mobile">2025-07-17 15:21:29</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -334,7 +334,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>1k 字</span>
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>977 字</span>
         </span>
     
     
@@ -356,10 +356,7 @@
 		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
 			<p>核心概念</p>
 <p>xlsxwriter 通过<strong>单元格格式</strong>和<strong>文本位置索引</strong>来精确控制文本区间样式，其判定逻辑基于以下关键内容：</p>
-<h3 id="1-文本区间定义方式-xA"><a href="#1-文本区间定义方式-xA" class="headerlink" title="1. 文本区间定义方式&#xA;"></a>1. 文本区间定义方式&#xA;</h3><div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">\# 基本语法（非真实代码，仅示意逻辑）</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">worksheet.write\_rich\_string(</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   row, col,&amp;#x20;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   \[format1, &quot;红色文本&quot;, format2, &quot;普通文本&quot;]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
-
-
-
+<h3 id="1-文本区间定义方式-xA"><a href="#1-文本区间定义方式-xA" class="headerlink" title="1. 文本区间定义方式&#xA;"></a>1. 文本区间定义方式&#xA;</h3><div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 基本语法（非真实代码，仅示意逻辑）</span><br><span class="line">worksheet.write_rich_string(</span><br><span class="line">    row, col,</span><br><span class="line">    [format1, &quot;红色文本&quot;, format2, &quot;普通文本&quot;]</span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
 <ul>
 <li><p><strong>位置判定</strong>：根据字符串在参数列表中的顺序确定位置</p>
 </li>
@@ -390,25 +387,21 @@
 <td>换行符 (\n) 会创建新文本段但不中断格式应用&#xA;</td>
 </tr>
 </tbody></table>
-<h3 id="3-实际应用示例-xA"><a href="#3-实际应用示例-xA" class="headerlink" title="3. 实际应用示例&#xA;"></a>3. 实际应用示例&#xA;</h3><h4 id="案例-1：基础红黑文本-xA"><a href="#案例-1：基础红黑文本-xA" class="headerlink" title="案例 1：基础红黑文本&#xA;"></a>案例 1：基础红黑文本&#xA;</h4><div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">red = workbook.add\_format(&#123;&#x27;color&#x27;: &#x27;red&#x27;&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">black = workbook.add\_format(&#123;&#x27;color&#x27;: &#x27;black&#x27;&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">\# &quot;答案&quot;红色，&quot;:&quot;黑色，&quot;42&quot;红色</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">worksheet.write\_rich\_string(&#x27;A1&#x27;,&amp;#x20;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   red, &#x27;答案&#x27;,&amp;#x20;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   black, &#x27;:&#x27;,&amp;#x20;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   red, &#x27;42&#x27;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
+<h3 id="3-实际应用示例-xA"><a href="#3-实际应用示例-xA" class="headerlink" title="3. 实际应用示例&#xA;"></a>3. 实际应用示例&#xA;</h3><h4 id="案例-1：基础红黑文本-xA"><a href="#案例-1：基础红黑文本-xA" class="headerlink" title="案例 1：基础红黑文本&#xA;"></a>案例 1：基础红黑文本&#xA;</h4><div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">red = workbook.add_format(&#123;&#x27;color&#x27;: &#x27;red&#x27;&#125;)</span><br><span class="line">black = workbook.add_format(&#123;&#x27;color&#x27;: &#x27;black&#x27;&#125;)</span><br><span class="line"></span><br><span class="line"># &quot;答案&quot;红色，&quot;:&quot;黑色，&quot;42&quot;红色</span><br><span class="line">worksheet.write_rich_string(&#x27;A1&#x27;,</span><br><span class="line">    red, &#x27;答案&#x27;,</span><br><span class="line">    black, &#x27;:&#x27;,</span><br><span class="line">    red, &#x27;42&#x27;</span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
 
 <p>内存中的区间映射：</p>
-<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">\[0-2): 红色格式 (对应&quot;答案&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">\[2-3): 黑色格式 (对应&quot;:&quot;)&amp;#x20;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">\[3-5): 红色格式 (对应&quot;42&quot;)</span><br></pre></td></tr></table></figure></div>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[0-2): 红色格式 (对应&quot;答案&quot;)</span><br><span class="line">[2-3): 黑色格式 (对应&quot;:&quot;) </span><br><span class="line">[3-5): 红色格式 (对应&quot;42&quot;)</span><br></pre></td></tr></table></figure></div>
 
-<h4 id="案例-2：带格式继承的文本-xA"><a href="#案例-2：带格式继承的文本-xA" class="headerlink" title="案例 2：带格式继承的文本&#xA;"></a>案例 2：带格式继承的文本&#xA;</h4><div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">bold = workbook.add\_format(&#123;&#x27;bold&#x27;: True&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">default = workbook.add\_format()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">\# &quot;注意&quot;加粗，后续文本默认格式</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">worksheet.write\_rich\_string(&#x27;A2&#x27;,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   bold, &#x27;注意&#x27;,&amp;#x20;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   None, &#x27;：请检查数据&#x27;  # None继承单元格默认格式</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
+<h4 id="案例-2：带格式继承的文本-xA"><a href="#案例-2：带格式继承的文本-xA" class="headerlink" title="案例 2：带格式继承的文本&#xA;"></a>案例 2：带格式继承的文本&#xA;</h4><div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">bold = workbook.add_format(&#123;&#x27;bold&#x27;: True&#125;)</span><br><span class="line">default = workbook.add_format()</span><br><span class="line"></span><br><span class="line"># &quot;注意&quot;加粗，后续文本默认格式</span><br><span class="line">worksheet.write_rich_string(&#x27;A2&#x27;,</span><br><span class="line">    bold, &#x27;注意&#x27;,</span><br><span class="line">    None, &#x27;：请检查数据&#x27;  # None继承单元格默认格式</span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
 
-<h3 id="4-特殊场景处理-xA"><a href="#4-特殊场景处理-xA" class="headerlink" title="4. 特殊场景处理&#xA;"></a>4. 特殊场景处理&#xA;</h3><h4 id="混合格式文本-xA"><a href="#混合格式文本-xA" class="headerlink" title="混合格式文本&#xA;"></a>混合格式文本&#xA;</h4><div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">\# 同一单词中部分字母标红</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">worksheet.write\_rich\_string(&#x27;A3&#x27;,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   black, &#x27;Pri&#x27;,&amp;#x20;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   red, &#x27;mar&#x27;,&amp;#x20;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   black, &#x27;y&#x27;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
-
+<h3 id="4-特殊场景处理-xA"><a href="#4-特殊场景处理-xA" class="headerlink" title="4. 特殊场景处理&#xA;"></a>4. 特殊场景处理&#xA;</h3><h4 id="混合格式文本-xA"><a href="#混合格式文本-xA" class="headerlink" title="混合格式文本&#xA;"></a>混合格式文本&#xA;</h4><div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 同一单词中部分字母标红</span><br><span class="line">worksheet.write_rich_string(&#x27;A3&#x27;,</span><br><span class="line">    black, &#x27;Pri&#x27;,</span><br><span class="line">    red, &#x27;mar&#x27;,</span><br><span class="line">    black, &#x27;y&#x27;</span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
 <p>效果：显示为 “Primary” 其中 “mar” 为红色</p>
-<h4 id="动态文本构建-xA"><a href="#动态文本构建-xA" class="headerlink" title="动态文本构建&#xA;"></a>动态文本构建&#xA;</h4><div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">parts = \[black, &quot;随机值：&quot;]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if highlight:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   parts.extend(\[red, str(value)])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">else:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   parts.extend(\[black, str(value)])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;  &amp;#x20;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">worksheet.write\_rich\_string(&#x27;A4&#x27;, \*parts)</span><br></pre></td></tr></table></figure></div>
+<h4 id="动态文本构建-xA"><a href="#动态文本构建-xA" class="headerlink" title="动态文本构建&#xA;"></a>动态文本构建&#xA;</h4><div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">parts = [black, &quot;随机值：&quot;]</span><br><span class="line">if highlight:</span><br><span class="line">    parts.extend([red, str(value)])</span><br><span class="line">else:</span><br><span class="line">    parts.extend([black, str(value)])</span><br><span class="line">    </span><br><span class="line">worksheet.write_rich_string(&#x27;A4&#x27;, *parts)</span><br></pre></td></tr></table></figure></div>
 
 <h3 id="5-底层实现原理-xA"><a href="#5-底层实现原理-xA" class="headerlink" title="5. 底层实现原理&#xA;"></a>5. 底层实现原理&#xA;</h3><ul>
 <li><strong>OpenXML 映射</strong>：最终生成类似以下 XML 结构</li>
 </ul>
-<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">\&lt;r&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20; \&lt;rPr&gt;\&lt;color rgb=&quot;FFFF0000&quot;/&gt;\&lt;/rPr&gt;</span><br><span class="line"></span><br><span class="line">&amp;#x20; \&lt;t&gt;答案\&lt;/t&gt;</span><br><span class="line"></span><br><span class="line">\&lt;/r&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">\&lt;r&gt;</span><br><span class="line"></span><br><span class="line">&amp;#x20; \&lt;rPr&gt;\&lt;color rgb=&quot;FF000000&quot;/&gt;\&lt;/rPr&gt;</span><br><span class="line"></span><br><span class="line">&amp;#x20; \&lt;t&gt;:\&lt;/t&gt;</span><br><span class="line"></span><br><span class="line">\&lt;/r&gt;</span><br></pre></td></tr></table></figure></div>
-
-
-
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;r&gt;</span><br><span class="line">  &lt;rPr&gt;&lt;color rgb=&quot;FFFF0000&quot;/&gt;&lt;/rPr&gt;</span><br><span class="line">  &lt;t&gt;答案&lt;/t&gt;</span><br><span class="line">&lt;/r&gt;</span><br><span class="line">&lt;r&gt;</span><br><span class="line">  &lt;rPr&gt;&lt;color rgb=&quot;FF000000&quot;/&gt;&lt;/rPr&gt;</span><br><span class="line">  &lt;t&gt;:&lt;/t&gt;</span><br><span class="line">&lt;/r&gt;</span><br></pre></td></tr></table></figure></div>
 <ul>
 <li><strong>索引计算</strong>：库内部维护格式栈，根据参数顺序计算每个文本段的起止位置</li>
 </ul>
@@ -419,14 +412,12 @@
 </li>
 <li><p><strong>边界情况</strong>：</p>
 <ul>
-<li><p>空字符串仍会占用格式区间</p>
-</li>
-<li><p>连续的相同格式不会自动合并</p>
-</li>
+<li>空字符串仍会占用格式区间</li>
+<li>连续的相同格式不会自动合并</li>
 </ul>
 </li>
 </ul>
-<h3 id="7-调试技巧-xA"><a href="#7-调试技巧-xA" class="headerlink" title="7. 调试技巧&#xA;"></a>7. 调试技巧&#xA;</h3><div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">\# 查看实际生成的XML（需要保存文件后解压查看）</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">workbook.filename = &#x27;output.xlsx&#x27;</span><br><span class="line"></span><br><span class="line">workbook.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">\# 解压后查看xl/worksheets/sheet1.xml</span><br></pre></td></tr></table></figure></div>
+<h3 id="7-调试技巧-xA"><a href="#7-调试技巧-xA" class="headerlink" title="7. 调试技巧&#xA;"></a>7. 调试技巧&#xA;</h3><div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 查看实际生成的XML（需要保存文件后解压查看）</span><br><span class="line">workbook.filename = &#x27;output.xlsx&#x27;</span><br><span class="line">workbook.close()</span><br><span class="line"># 解压后查看xl/worksheets/sheet1.xml</span><br></pre></td></tr></table></figure></div>
 
 <h3 id="最佳实践建议-xA"><a href="#最佳实践建议-xA" class="headerlink" title="最佳实践建议&#xA;"></a>最佳实践建议&#xA;</h3><ul>
 <li><p>批量合并相同格式的文本段</p>
@@ -438,7 +429,7 @@
 <li><p>对动态内容使用辅助函数构建参数列表</p>
 </li>
 </ul>
-<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">def build\_rich\_text(text\_parts):</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   result = \[]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   for text, fmt in text\_parts:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;       result.extend(\[fmt, text])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20;   return result</span><br></pre></td></tr></table></figure></div>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def build_rich_text(text_parts):</span><br><span class="line">    result = []</span><br><span class="line">    for text, fmt in text_parts:</span><br><span class="line">        result.extend([fmt, text])</span><br><span class="line">    return result</span><br></pre></td></tr></table></figure></div>
 
 <p><strong>注</strong>：与 openpyxl 的 CellRichText 不同，xlsxwriter 采用更底层的格式绑定机制，对文本区间的判定完全基于参数序列顺序，不依赖任何文本标记符号。</p>
 <h3 id="关键要点总结-xA"><a href="#关键要点总结-xA" class="headerlink" title="关键要点总结&#xA;"></a>关键要点总结&#xA;</h3><ol>
@@ -451,6 +442,7 @@
 <li><p>处理富文本时需要特别注意参数列表的构建顺序</p>
 </li>
 </ol>
+<p>PS:代码仅供参考，内容不一定正确，要根据实际情况处理喵</p>
 
 		</div>
 
@@ -563,7 +555,7 @@
                     </span>
                     
                         <span>
-                            共 23.9k 字
+                            共 16.2k 字
                         </span>
                     
                 </p>

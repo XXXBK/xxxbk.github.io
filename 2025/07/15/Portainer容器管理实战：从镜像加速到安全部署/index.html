@@ -30,7 +30,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s21.ax1x.com/2025/07/15/pV13iP1.png">
 <meta property="article:published_time" content="2025-07-15T09:50:31.000Z">
-<meta property="article:modified_time" content="2025-07-15T09:56:57.921Z">
+<meta property="article:modified_time" content="2025-07-17T07:21:47.120Z">
 <meta property="article:author" content="XXXBK">
 <meta property="article:tag" content="Docker">
 <meta property="article:tag" content="Portainer">
@@ -283,8 +283,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2025-07-15 17:56:57</span>
-            <span class="mobile">2025-07-15 17:56:57</span>
+            <span class="desktop">2025-07-17 15:21:47</span>
+            <span class="mobile">2025-07-17 15:21:47</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -334,12 +334,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>1k 字</span>
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>955 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fa-regular fa-clock"></i>&nbsp;<span>4 分钟</span>
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>3 分钟</span>
         </span>
     
     
@@ -363,25 +363,16 @@
 <p>但本次尝试使用第三方镜像源：</p>
 <div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull docker.1ms.run/portainer/portainer-ce:latest</span><br></pre></td></tr></table></figure></div>
 
-<p>执行结果：</p>
-<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Using default tag: latest</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">latest: Pulling from portainer/portainer-ce</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">63c930229559: Pull complete&amp;#x20;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">d3b1c06ebf8c: Pull complete&amp;#x20;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">...（中间层拉取省略）</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Digest: sha256:224a378fbc5ae579dc9d570c5ca2e5e981a4a003c8d7c2c5b5e482af97c2f87c</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Status: Downloaded newer image for docker.1ms.run/portainer/portainer-ce:latest</span><br></pre></td></tr></table></figure></div>
 
 <p><strong>注意事项：</strong></p>
 <ul>
-<li><p>第三方镜像源可能存在安全风险，建议优先使用官方镜像（<code>portainer/portainer-ce</code>）。</p>
-</li>
-<li><p>若拉取失败，可检查镜像源是否可用（如执行<code>ping docker.1ms.run</code>），或切换至国内加速源（如 Docker 中国镜像站）。</p>
-</li>
+<li>第三方镜像源可能存在安全风险，建议优先使用官方镜像（<code>portainer/portainer-ce</code>）。</li>
+<li>若拉取失败，可检查镜像源是否可用（如执行<code>ping docker.1ms.run</code>），或切换至国内加速源（如 Docker 中国镜像站）。</li>
 </ul>
 <h3 id="2-验证镜像是否成功拉取-xA"><a href="#2-验证镜像是否成功拉取-xA" class="headerlink" title="2. 验证镜像是否成功拉取&#xA;"></a>2. 验证镜像是否成功拉取&#xA;</h3><p>通过<code>docker images</code>命令查看本地镜像列表：</p>
 <div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure></div>
-
-<p>输出结果：</p>
-<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">REPOSITORY                              TAG       IMAGE ID       CREATED       SIZE</span><br><span class="line"></span><br><span class="line">docker.1ms.run/portainer/portainer-ce   latest    71de3839351a   2 days ago    268MB</span><br></pre></td></tr></table></figure></div>
-
 <h3 id="3-启动-Portainer-容器-xA"><a href="#3-启动-Portainer-容器-xA" class="headerlink" title="3. 启动 Portainer 容器&#xA;"></a>3. 启动 Portainer 容器&#xA;</h3><p>使用以下命令启动容器，并配置挂载与端口映射：</p>
-<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">docker run -d \\</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20; \--name portainer \\</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20; -p 9000:9000 \\</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20; -v /var/run/docker.sock:/var/run/docker.sock \\</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20; -v portainer\_data:/data \\</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20; \--restart=always \\</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20; docker.1ms.run/portainer/portainer-ce:latest</span><br></pre></td></tr></table></figure></div>
-
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">  --name portainer \</span><br><span class="line">  -p 9000:9000 \</span><br><span class="line">  -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">  -v portainer_data:/data \</span><br><span class="line">  --restart=always \</span><br><span class="line">  docker.1ms.run/portainer/portainer-ce:latest</span><br></pre></td></tr></table></figure></div>
 <p><strong>参数解析：</strong></p>
 <ul>
 <li><p><code>-d</code>：后台运行容器；</p>
@@ -411,7 +402,7 @@
 
 <p><strong>解决方法：</strong></p>
 <p>配置国内镜像加速源，编辑<code>/etc/docker/daemon.json</code>添加：</p>
-<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&amp;#x20; &quot;registry-mirrors&quot;: \[&quot;https://registry.docker-cn.com&quot;, &quot;https://docker.mirrors.ustc.edu.cn&quot;]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;registry-mirrors&quot;: [&quot;https://registry.docker-cn.com&quot;, &quot;https://docker.mirrors.ustc.edu.cn&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
 <p>重启 Docker 服务：<code>sudo systemctl restart docker</code>。</p>
 <p>四、使用第三方镜像源的风险与建议</p>
@@ -426,6 +417,7 @@
 <p>五、总结：Portainer 的价值与容器管理实践</p>
 <p>通过 Docker 部署 Portainer 后，可直观管理容器、镜像、网络及数据卷，尤其适合新手快速上手容器化部署。本次从第三方镜像源拉取的经历表明：技术实践中需在效率与安全性间权衡，建议在测试环境尝试非官方源，生产环境务必使用官方可信镜像。</p>
 <p>后续可进一步探索 Portainer 的 Kubernetes 管理、RBAC 权限控制等高级功能，提升容器化应用的部署与运维效率。</p>
+<p>PS:代码仅供参考，内容不一定正确，要根据实际情况处理喵</p>
 
 		</div>
 
@@ -535,7 +527,7 @@
                     </span>
                     
                         <span>
-                            共 23.9k 字
+                            共 16.2k 字
                         </span>
                     
                 </p>
