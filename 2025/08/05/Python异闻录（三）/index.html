@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="BinkaiXu">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2025/08/05/python异闻录（三）/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+    
+    
+        
+        <meta name="description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python异闻录（三）">
+<meta property="og:url" content="http://example.com/2025/08/05/Python%E5%BC%82%E9%97%BB%E5%BD%95%EF%BC%88%E4%B8%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s21.ax1x.com/2025/07/15/pV13iP1.png">
+<meta property="article:published_time" content="2025-08-05T08:36:02.000Z">
+<meta property="article:modified_time" content="2025-08-05T08:41:01.163Z">
+<meta property="article:author" content="XXXBK">
+<meta property="article:tag" content="正则表达式">
+<meta property="article:tag" content="元编程">
+<meta property="article:tag" content="生成器">
+<meta property="article:tag" content="类型系统">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s21.ax1x.com/2025/07/15/pV13iP1.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="https://s21.ax1x.com/2025/07/15/pV13C5R.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://s21.ax1x.com/2025/07/15/pV13C5R.png">
+    <meta name="theme-color" content="#FFC0CB">
+    <link rel="shortcut icon" href="https://s21.ax1x.com/2025/07/15/pV13C5R.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            Python异闻录（三） | 缘来是这样的吗
+        
+    </title>
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/css/build/tailwind.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/GeistMono/geist-mono.css">
+
+    
+<link rel="stylesheet" href="/fonts/Geist/geist.css">
+
+    <!--- Font Part-->
+    
+    
+    
+        <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@4.5.0/index.css" rel="stylesheet">
+    
+    
+    
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"delete_mask":true,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[""]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"github","dark":"vs2015"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":false,"init_open":true},"copyright":{"enable":false,"default":"cc_by_nc_sa"},"lazyload":true,"pangu_js":false,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[],"strategy":"hybrid","exclude":["/private/","/archives/"],"min_similarity":0.2}},"colors":{"primary":"#FFC0CB","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":true,"family":"Source Han Sans SC, Microsoft YaHei, sans-serif","url":"https://cdn.jsdelivr.net/npm/@fontsource/inter@4.5.0/index.css"},"english":{"enable":false,"family":null,"url":null},"title":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":false},"website_counter":{"url":"https://cn.vercount.one/js","enable":false,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":false,"custom_message":null},"open_graph":{"enable":true,"image":"https://s21.ax1x.com/2025/07/15/pV13iP1.png","description":"Hexo Theme Redefine, Redefine Your Hexo Journey."},"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"https://s21.ax1x.com/2025/07/15/pV13iP1.png","dark":"https://s21.ax1x.com/2025/07/15/pV13iP1.png"},"title":" ","subtitle":{"text":["XXXBK"],"hitokoto":{"enable":true,"show_author":true,"api":"https://v1.hitokoto.cn?&c=d&c=c&c=k&c=i"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#FFC0CB","dark":"#FFC0CB"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"style":"default","links":{"github":"https://github.com/XXXBK","instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":true,"type":"fixed","meting":false,"audios":[{"name":"恋風","artist":"幾田りら","url":"/music/恋风.mp3","cover":"http://p2.music.126.net/LYjbg8Qe2s2O4EOPm5ijFg==/109951170675831225.jpg?param=130y130"},{"name":"群青","artist":"YOASOBI","url":"/music/群青.mp3","cover":"https://images.genius.com/72a054320dabe59b4be3823e80b74d22.1000x1000x1.jpg"},{"name":"優しい彗星","artist":"YOASOBI","url":"/music/優しい彗星.mp3","cover":"https://www.musicvoice.jp/wp-content/uploads/2021/01/pmu210113-m308.jpg"},{"name":"夜に駆ける","artist":"YOASOBI","url":"/music/夜に駆ける.mp3","cover":"https://ts1.tc.mm.bing.net/th/id/R-C.f905d573f8cf7769e3f9d8abf536ee27?rik=KeKlpCxVCF1Yow&riu=http%3a%2f%2fi2.hdslb.com%2fbfs%2farchive%2fa0f75915d2dfe1cbc20064b9b39331972caf5a18.jpg&ehk=rd8w3sHgQ%2f%2fLjuHcZYGtP2diXcKu0s245xmTUvkXKZo%3d&risl=&pid=ImgRaw&r=0"},{"name":"セブンティーン","artist":"YOASOBI","url":"/music/セブンティーン.mp3","cover":"https://is3-ssl.mzstatic.com/image/thumb/Music116/v4/c3/93/65/c393653a-e44f-f723-f82b-500b8fb49d09/197188385958.jpg/800x800bb.webp"},{"name":"もう少しだけ","artist":"YOASOBI","url":"/music/もう少しだけ.mp3","cover":"https://p1.music.126.net/seyhDwTzRNqFvYAw9FtJnw==/109951165930283941.jpg?param=130y130"},{"name":"ロマンスの約束","artist":"YOASOBI","url":"/music/ロマンスの約束.mp3","cover":"https://is5-ssl.mzstatic.com/image/thumb/Music115/v4/bf/29/c3/bf29c326-8766-2b6a-708f-b42c0e5d1754/196292065640.jpg/1200x1200bf-60.jpg"}]},"mermaid":{"enable":false,"version":"11.4.1"}},"version":"2.8.2","navbar":{"auto_hide":false,"color":{"left":"#F1F5D4","right":"#FFC0CB","transparency":35},"width":{"home":"1400px","pages":"1200px"},"links":null,"search":{"enable":true,"preload":false,"field":"post","content":false,"format":"raw"}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"right","first_item":"menu","announcement":"欢迎来到我的博客","show_on_mobile":true,"links":{"文章":{"path":"/archives","icon":"fa-regular fa-archive"},"标签":{"path":"/tags","icon":"fa-regular fa-tags"},"类别":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","excerpt_length":200,"categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3},"类别":{"enable":true,"limit":3}},"footerStart":"2025/7/5 11:05"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+
+<body>
+	<div class="progress-bar-container">
+	
+
+	
+	<span class="pjax-progress-bar"></span>
+	<!--        <span class="swup-progress-icon">-->
+	<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+	<!--        </span>-->
+	
+</div>
+
+<main class="page-container" id="swup">
+
+	
+
+	<div class="main-content-container flex flex-col justify-between min-h-dvh">
+		<div class="main-content-header">
+			<header class="navbar-container px-6 md:px-12">
+    <div class="navbar-content transition-navbar ">
+        <div class="left">
+            
+                <a class="logo-image h-8 w-8 sm:w-10 sm:h-10 mr-3" href="/">
+                    <img src="https://s21.ax1x.com/2025/07/15/pV11zb4.png" class="w-full h-full rounded-sm">
+                </a>
+            
+            <a class="logo-title" href="/">
+                
+                缘来是这样的吗
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-dvh w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+
+            
+            
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/archives"
+                        >
+                            <span>文章</span>
+                            <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/tags"
+                        >
+                            <span>标签</span>
+                            <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/categories"
+                        >
+                            <span>类别</span>
+                            <i class="fa-regular fa-folder fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">
+            39
+        </div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20"
+        href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">
+            17
+        </div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20"
+        href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">
+            11
+        </div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+		</div>
+
+		<div class="main-content-body transition-fade-up">
+			
+
+			<div class="main-content">
+				<div class="post-page-container flex relative justify-between box-border w-full h-full">
+	<div class="article-content-container">
+
+		<div class="article-title relative w-full">
+			
+			<div class="w-full flex items-center pt-6 justify-start">
+				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">Python异闻录（三）</h1>
+			</div>
+			
+		</div>
+
+		
+		<div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+			<div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+				<img src="https://s21.ax1x.com/2025/07/04/pVKlaSe.jpg">
+			</div>
+			<div class="info flex flex-col justify-between">
+				<div class="author flex items-center">
+					<span class="name text-default-text-color text-lg font-semibold">BinkaiXu</span>
+					
+					<span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1"></span>
+					
+				</div>
+				<div class="meta-info">
+					<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2025-08-05 16:36:02</span>
+        <span class="mobile">2025-08-05 16:36:02</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2025-08-05 16:41:01</span>
+            <span class="mobile">2025-08-05 16:41:01</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/Python/">Python</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/Python/%E7%B1%BB%E5%9E%8B%E6%B3%A8%E8%A7%A3/">类型注解</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">正则表达式</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E5%85%83%E7%BC%96%E7%A8%8B/">元编程</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E7%94%9F%E6%88%90%E5%99%A8/">生成器</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F/">类型系统</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>1.4k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>6 分钟</span>
+        </span>
+    
+    
+</div>
+
+				</div>
+			</div>
+		</div>
+		
+
+		
+
+
+		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+			<h1 id="7-元编程"><a href="#7-元编程" class="headerlink" title="7. 元编程"></a>7. 元编程</h1><h2 id="7-1-动态创建类"><a href="#7-1-动态创建类" class="headerlink" title="7.1 动态创建类"></a>7.1 动态创建类</h2><ul>
+<li><p>概念：在程序运行时动态地创建类，而不是在代码中静态定义。</p>
+</li>
+<li><p>实现方式：使用 <code>type()</code> 函数，<code>type()</code> 函数既可以返回对象的类型，也可以用于动态创建类。</p>
+</li>
+<li><p><code>type()</code> 动态创建类的语法：<code>type(class_name, bases, namespace)</code>，其中 <code>class_name</code> 是类名，<code>bases</code> 是父类元组，<code>namespace</code> 是类的属性和方法字典。</p>
+</li>
+</ul>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">#定义类的方法</span><br><span class="line"></span><br><span class="line">def say_hello(self):</span><br><span class="line"></span><br><span class="line">   print(f&quot;Hello, I&#x27;m &#123;self.name&#125;&quot;)</span><br><span class="line"></span><br><span class="line">def set_age(self, age):</span><br><span class="line"></span><br><span class="line">self.age = age</span><br><span class="line"></span><br><span class="line"># 动态创建类</span><br><span class="line"></span><br><span class="line">Person = type(&quot;Person&quot;, (object,), &#123;</span><br><span class="line"></span><br><span class="line">   &quot;name&quot;: &quot;Unknown&quot;,</span><br><span class="line"></span><br><span class="line">   &quot;say_hello&quot;: say_hello,</span><br><span class="line"></span><br><span class="line">   &quot;set_age&quot;: set_age</span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"># 使用动态创建的类</span><br><span class="line"></span><br><span class="line">p = Person()</span><br><span class="line"></span><br><span class="line">p.say_hello()  # 输出Hello, I&#x27;m Unknown</span><br><span class="line"></span><br><span class="line">p.name = &quot;Alice&quot;</span><br><span class="line"></span><br><span class="line">p.say_hello()  # 输出Hello, I&#x27;m Alice</span><br><span class="line"></span><br><span class="line">p.set_age(18)</span><br><span class="line"></span><br><span class="line">print(p.age)  # 输出18</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="8-性能优化"><a href="#8-性能优化" class="headerlink" title="8. 性能优化"></a>8. 性能优化</h1><h2 id="8-1-生成器"><a href="#8-1-生成器" class="headerlink" title="8.1 生成器"></a>8.1 生成器</h2><ul>
+<li><p>概念：生成器是一种特殊的迭代器，通过 <code>yield</code> 关键字返回值，每次调用 <code>next()</code> 方法时，从上次 <code>yield</code> 的位置继续执行。</p>
+</li>
+<li><p>特点：</p>
+<ul>
+<li><p>惰性计算：生成器不会一次性生成所有数据，而是在需要时生成，节省内存空间。</p>
+</li>
+<li><p>可迭代性：生成器是可迭代对象，可以使用 <code>for</code> 循环遍历。</p>
+</li>
+</ul>
+</li>
+<li><p>应用场景：处理大量数据、实现无限序列等。</p>
+</li>
+</ul>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"># 生成器函数</span><br><span class="line"></span><br><span class="line">def number_generator(n):</span><br><span class="line"></span><br><span class="line">   for i in range(n):</span><br><span class="line"></span><br><span class="line">       yield i</span><br><span class="line"></span><br><span class="line">       print(f&quot;Yielded &#123;i&#125;&quot;)</span><br><span class="line"></span><br><span class="line"># 使用生成器</span><br><span class="line"></span><br><span class="line">gen = number_generator(3)</span><br><span class="line"></span><br><span class="line">print(next(gen))  # 输出0，之后打印Yielded 0</span><br><span class="line"></span><br><span class="line">print(next(gen))  # 输出1，之后打印Yielded 1</span><br><span class="line"></span><br><span class="line">print(next(gen))  # 输出2，之后打印Yielded 2</span><br><span class="line"></span><br><span class="line"># 使用for循环遍历</span><br><span class="line"></span><br><span class="line">for num in number_generator(3):</span><br><span class="line"></span><br><span class="line">   print(num)  # 依次输出0、1、2，每次输出前会打印Yielded相应数字</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="8-2-slots"><a href="#8-2-slots" class="headerlink" title="8.2 __slots__"></a>8.2 <code>__slots__</code></h2><ul>
+<li><p>概念：<code>__slots__</code> 是一个类属性，用于限制类的实例可以添加的属性，同时可以提高属性访问速度和节省内存。</p>
+</li>
+<li><p>原理：默认情况下，类的实例会使用字典存储属性，<code>__slots__</code> 会让实例使用固定大小的数组存储属性，而不是字典。</p>
+</li>
+<li><p>注意事项：</p>
+<ul>
+<li><p><code>__slots__</code> 中定义的属性是固定的，实例不能添加 <code>__slots__</code> 之外的属性。</p>
+</li>
+<li><p>子类如果没有定义 <code>__slots__</code>，则可以继承父类的 <code>__slots__</code> 并添加新属性；如果子类定义了 <code>__slots__</code>，则是父类 <code>__slots__</code> 与子类 <code>__slots__</code> 的并集。</p>
+</li>
+</ul>
+</li>
+</ul>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class Person:</span><br><span class="line"></span><br><span class="line">   __slots__ = (&quot;name&quot;, &quot;age&quot;)  # 限制只能有name和age属性</span><br><span class="line"></span><br><span class="line">p = Person()</span><br><span class="line"></span><br><span class="line">p.name = &quot;Alice&quot;</span><br><span class="line"></span><br><span class="line">p.age = 18</span><br><span class="line"></span><br><span class="line"># p.gender = &quot;female&quot;  # 会抛出AttributeError，因为gender不在__slots__中</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="9-标准库"><a href="#9-标准库" class="headerlink" title="9. 标准库"></a>9. 标准库</h1><h2 id="9-1-re-模块（正则表达式）"><a href="#9-1-re-模块（正则表达式）" class="headerlink" title="9.1 re 模块（正则表达式）"></a>9.1 <code>re</code> 模块（正则表达式）</h2><ul>
+<li><p>概念：<code>re</code> 模块提供了正则表达式的支持，用于字符串的匹配、查找、替换等操作。</p>
+</li>
+<li><p>常用函数：</p>
+<ul>
+<li><p><code>re.match(pattern, string)</code>：从字符串开头匹配模式，返回匹配对象或 <code>None</code>。</p>
+</li>
+<li><p><code>re.search(pattern, string)</code>：在整个字符串中查找第一个匹配模式的位置，返回匹配对象或 <code>None</code>。</p>
+</li>
+<li><p><code>re.findall(pattern, string)</code>：返回所有匹配模式的子串列表。</p>
+</li>
+<li><p><code>re.sub(pattern, repl, string)</code>：将匹配模式的子串替换为 <code>repl</code>，返回替换后的字符串。</p>
+</li>
+</ul>
+</li>
+<li><p>常用元字符：<code>. </code>（匹配任意字符）、<code>*</code>（匹配前一个字符 0 次或多次）、<code>+</code>（匹配前一个字符 1 次或多次）、<code>?</code>（匹配前一个字符 0 次或 1 次）、<code>^</code>（匹配字符串开头）、<code>$</code>（匹配字符串结尾）、<code>[]</code>（字符集）、<code>()</code>（分组）等。</p>
+</li>
+</ul>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">import re</span><br><span class="line"></span><br><span class="line"># match示例</span><br><span class="line"></span><br><span class="line">result = re.match(r&quot;Hello&quot;, &quot;Hello World&quot;)</span><br><span class="line"></span><br><span class="line">print(result.group())  # 输出Hello</span><br><span class="line"></span><br><span class="line"># search示例</span><br><span class="line"></span><br><span class="line">result = re.search(r&quot;World&quot;, &quot;Hello World&quot;)</span><br><span class="line"></span><br><span class="line">print(result.group())  # 输出World</span><br><span class="line"></span><br><span class="line"># findall示例</span><br><span class="line"></span><br><span class="line">result = re.findall(r&quot;d+&quot;, &quot;There are 123 apples and 456 bananas&quot;)</span><br><span class="line"></span><br><span class="line">print(result)  # 输出[&#x27;123&#x27;, &#x27;456&#x27;]</span><br><span class="line"></span><br><span class="line"># sub示例</span><br><span class="line"></span><br><span class="line">result = re.sub(r&quot;d+&quot;, &quot;many&quot;, &quot;There are 123 apples and 456 bananas&quot;)</span><br><span class="line"></span><br><span class="line">print(result)  # 输出There are many apples and many bananas</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="9-2-pathlib-模块"><a href="#9-2-pathlib-模块" class="headerlink" title="9.2 pathlib 模块"></a>9.2 <code>pathlib</code> 模块</h2><ul>
+<li><p>概念：<code>pathlib</code> 模块提供了面向对象的文件系统路径操作方式，相比传统的 <code>os.path</code> 模块更直观、易用。</p>
+</li>
+<li><p>常用类：<code>Path</code> 是主要的类，用于表示文件或目录的路径。</p>
+</li>
+<li><p>常用方法：</p>
+<ul>
+<li><p><code>exists()</code>：判断路径是否存在。</p>
+</li>
+<li><p><code>is_file()</code>：判断是否为文件。</p>
+</li>
+<li><p><code>is_dir()</code>：判断是否为目录。</p>
+</li>
+<li><p><code>mkdir()</code>：创建目录。</p>
+</li>
+<li><p><code>glob()</code>：查找匹配的文件或目录。</p>
+</li>
+<li><p><code>read_text()</code>：读取文本文件内容。</p>
+</li>
+<li><p><code>write_text()</code>：写入文本内容到文件。</p>
+</li>
+</ul>
+</li>
+</ul>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">from pathlib import Path</span><br><span class="line"></span><br><span class="line"># 创建Path对象</span><br><span class="line"></span><br><span class="line">path = Path(&quot;example.txt&quot;)</span><br><span class="line"></span><br><span class="line"># 检查路径是否存在</span><br><span class="line"></span><br><span class="line">print(path.exists())  # 输出False（假设文件不存在）</span><br><span class="line"></span><br><span class="line"># 创建文件并写入内容</span><br><span class="line"></span><br><span class="line">path.write_text(&quot;Hello, pathlib!&quot;)</span><br><span class="line"></span><br><span class="line">print(path.exists())  # 输出True</span><br><span class="line"></span><br><span class="line">print(path.is_file())  # 输出True</span><br><span class="line"></span><br><span class="line"># 读取文件内容</span><br><span class="line"></span><br><span class="line">print(path.read_text())  # 输出Hello, pathlib!</span><br><span class="line"></span><br><span class="line"># 查找当前目录下的txt文件</span><br><span class="line"></span><br><span class="line">txt_files = list(Path(&quot;.&quot;).glob(&quot;*.txt&quot;))</span><br><span class="line"></span><br><span class="line">print(txt_files)  # 输出包含example.txt的列表</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="10-类型系统"><a href="#10-类型系统" class="headerlink" title="10. 类型系统"></a>10. 类型系统</h1><h2 id="10-1-泛型"><a href="#10-1-泛型" class="headerlink" title="10.1 泛型"></a>10.1 泛型</h2><ul>
+<li><p>概念：泛型允许在定义函数、类或接口时使用类型变量，而不是具体的类型，从而实现代码的复用和类型安全。</p>
+</li>
+<li><p>作用：在不牺牲类型检查的前提下，使代码能够处理多种不同类型的数据。</p>
+</li>
+<li><p>实现：使用 <code>typing</code> 模块中的 <code>Generic</code>、<code>TypeVar</code> 等工具。<code>TypeVar</code> 用于定义类型变量，<code>Generic</code> 用于使类支持泛型。</p>
+</li>
+</ul>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">from typing import TypeVar, Generic, List</span><br><span class="line"></span><br><span class="line"># 定义类型变量</span><br><span class="line"></span><br><span class="line">T = TypeVar(&#x27;T&#x27;)</span><br><span class="line"></span><br><span class="line"># 泛型函数</span><br><span class="line"></span><br><span class="line">def first_element(lst: List[T]) -&gt; T:</span><br><span class="line"></span><br><span class="line">   return lst[0]</span><br><span class="line"></span><br><span class="line"># 泛型类</span><br><span class="line"></span><br><span class="line">class Stack(Generic[T]):</span><br><span class="line"></span><br><span class="line">   def __init__(self):</span><br><span class="line"></span><br><span class="line">       self.items: List[T] = []</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   def push(self, item: T) -&gt; None:</span><br><span class="line"></span><br><span class="line">       self.items.append(item)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   def pop(self) -&gt; T:</span><br><span class="line"></span><br><span class="line">       return self.items.pop()</span><br><span class="line"></span><br><span class="line"># 使用泛型函数</span><br><span class="line"></span><br><span class="line">int_list = [1, 2, 3]</span><br><span class="line"></span><br><span class="line">print(first_element(int_list))  # 输出1，类型为int</span><br><span class="line"></span><br><span class="line">str_list = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]</span><br><span class="line"></span><br><span class="line">print(first_element(str_list))  # 输出a，类型为str</span><br><span class="line"></span><br><span class="line"># 使用泛型类</span><br><span class="line"></span><br><span class="line">int_stack = Stack[int]()</span><br><span class="line"></span><br><span class="line">int_stack.push(1)</span><br><span class="line"></span><br><span class="line">int_stack.push(2)</span><br><span class="line"></span><br><span class="line">print(int_stack.pop())  # 输出2，类型为int</span><br><span class="line"></span><br><span class="line">str_stack = Stack[str]()</span><br><span class="line"></span><br><span class="line">str_stack.push(&quot;hello&quot;)</span><br><span class="line"></span><br><span class="line">str_stack.push(&quot;world&quot;)</span><br><span class="line"></span><br><span class="line">print(str_stack.pop())  # 输出world，类型为str</span><br></pre></td></tr></table></figure></div>
+
+		</div>
+
+		
+
+		
+		<ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">#正则表达式</a>&nbsp;
+			</li>
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/%E5%85%83%E7%BC%96%E7%A8%8B/">#元编程</a>&nbsp;
+			</li>
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/%E7%94%9F%E6%88%90%E5%99%A8/">#生成器</a>&nbsp;
+			</li>
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F/">#类型系统</a>&nbsp;
+			</li>
+			
+		</ul>
+		
+
+		
+
+		
+		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+			
+			
+			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="next" rel="next" href="/2025/08/05/Python%E5%BC%82%E9%97%BB%E5%BD%95%EF%BC%88%E4%BA%8C%EF%BC%89/">
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item">Python异闻录（二）</span>
+						<span class="post-nav-item">下一篇</span>
+					</span>
+					<span class="right arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-right"></i>
+					</span>
+				</a>
+			</div>
+			
+		</div>
+		
+
+
+		
+	</div>
+
+	
+	<div class="toc-content-container">
+		<div class="post-toc-wrap">
+	<div class="post-toc">
+		<div class="toc-title">目录</div>
+		<div class="page-title">Python异闻录（三）</div>
+		<ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#7-%E5%85%83%E7%BC%96%E7%A8%8B"><span class="nav-text">7. 元编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1-%E5%8A%A8%E6%80%81%E5%88%9B%E5%BB%BA%E7%B1%BB"><span class="nav-text">7.1 动态创建类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="nav-text">8. 性能优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1-%E7%94%9F%E6%88%90%E5%99%A8"><span class="nav-text">8.1 生成器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-2-slots"><span class="nav-text">8.2 __slots__</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-%E6%A0%87%E5%87%86%E5%BA%93"><span class="nav-text">9. 标准库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#9-1-re-%E6%A8%A1%E5%9D%97%EF%BC%88%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%89"><span class="nav-text">9.1 re 模块（正则表达式）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-2-pathlib-%E6%A8%A1%E5%9D%97"><span class="nav-text">9.2 pathlib 模块</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F"><span class="nav-text">10. 类型系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#10-1-%E6%B3%9B%E5%9E%8B"><span class="nav-text">10.1 泛型</span></a></li></ol></li></ol>
+
+	</div>
+</div>
+	</div>
+	
+</div>
+			</div>
+
+			
+		</div>
+
+		<div class="main-content-footer">
+			<footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+            <div class="customize-info my-1">人生有梦，各自精彩，加油！</div>
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2025</span>
+              -
+            
+            2025&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">BinkaiXu</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共撰写了 11 篇文章
+                    </span>
+                    
+                        <span>
+                            共 25k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.8.2</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+		</div>
+	</div>
+
+	
+	<div class="post-tools">
+		<div class="post-tools-container">
+	<ul class="article-tools-list">
+		<!-- TOC aside toggle -->
+		
+		<li class="right-bottom-tools page-aside-toggle">
+			<i class="fa-regular fa-outdent"></i>
+		</li>
+		
+
+		<!-- go comment -->
+		
+	</ul>
+</div>
+	</div>
+	
+
+	<div class="right-side-tools-container">
+		<div class="side-tools-container">
+	<ul class="hidden-tools-list">
+		<li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-plus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-minus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+			<i class="fa-regular fa-moon"></i>
+		</li>
+
+		<!-- rss -->
+		
+
+		
+		<li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+			<i class="fa-regular fa-arrow-up"></i>
+		</li>
+		
+
+		<li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+			<i class="fa-regular fa-arrow-down"></i>
+		</li>
+	</ul>
+
+	<ul class="visible-tools-list">
+		<li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+			<i class="fa-regular fa-cog fa-spin"></i>
+		</li>
+		
+		
+	</ul>
+</div>
+	</div>
+
+	<div class="image-viewer-container">
+	<img src="">
+</div>
+
+	
+	<div class="search-pop-overlay">
+	<div class="popup search-popup">
+		<div class="search-header">
+			<span class="search-input-field-pre">
+				<i class="fa-solid fa-keyboard"></i>
+			</span>
+			<div class="search-input-container">
+				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="站内搜索您需要的内容..." spellcheck="false" type="search" class="search-input">
+			</div>
+			<span class="popup-btn-close">
+				<i class="fa-solid fa-times"></i>
+			</span>
+		</div>
+		<div id="search-result">
+			<div id="no-result">
+				<i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+			</div>
+		</div>
+	</div>
+</div>
+	
+
+</main>
+
+
+
+<script src="/js/build/libs/Swup.min.js"></script>
+
+<script src="/js/build/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/build/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/build/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/build/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="/js/build/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+	
+<script src="/js/build/tools/imageViewer.js" type="module"></script>
+
+<script src="/js/build/utils.js" type="module"></script>
+
+<script src="/js/build/main.js" type="module"></script>
+
+<script src="/js/build/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/build/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/build/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/build/layouts/categoryList.js" type="module"></script>
+
+
+
+    
+<script src="/js/build/tools/localSearch.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/build/tools/codeBlock.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/build/layouts/lazyload.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/build/tools/runtime.js"></script>
+
+    
+<script src="/js/build/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/build/libs/Typed.min.js"></script>
+
+  
+<script src="/js/build/plugins/typed.js" type="module"></script>
+
+
+
+
+
+
+
+
+    
+<script src="/js/build/libs/anime.min.js"></script>
+
+
+
+
+
+    
+<script src="/js/build/tools/tocToggle.js" type="module" data-swup-reload-script=""></script>
+
+<script src="/js/build/layouts/toc.js" type="module" data-swup-reload-script=""></script>
+
+<script src="/js/build/plugins/tabs.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+<script src="/js/build/libs/moment-with-locales.min.js" data-swup-reload-script=""></script>
+
+
+<script src="/js/build/layouts/essays.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+
+	
+	<div id="aplayer"></div>
+
+<script src="/js/build/libs/APlayer.min.js"></script>
+
+
+<script src="/js/build/plugins/aplayer.js"></script>
+
+
+	
+</body>
+
+</html>
